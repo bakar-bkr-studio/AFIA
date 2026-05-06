@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/Button";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import {
   ArrowRight,
-  Buildings,
   ClockCounterClockwise,
   EnvelopeSimple,
   HandHeart,
@@ -31,14 +30,19 @@ const timeline = [
     desc: "L'association naît pour répondre à un besoin concret des familles : se rencontrer, partager et recréer une vie locale dynamique.",
   },
   {
-    year: "2010 - 2022",
-    title: "Développement des actions locales",
-    desc: "Sorties familiales, animations de quartier et événements conviviaux s'installent progressivement dans le quotidien des habitants.",
+    year: "2022 à aujourd'hui",
+    title: "Création du pôle sociétal et social",
+    desc: "À l'initiative de Colette et Zainab, ce pôle accompagne les familles et les habitants, favorise l'écoute et la mobilisation, renforce la solidarité locale et développe des solutions collectives pour améliorer la qualité de vie.",
   },
   {
-    year: "2022",
-    title: "Structuration de l'association",
-    desc: "L'AFIA renforce son organisation, formalise ses pôles d'action et pose les bases d'un fonctionnement durable.",
+    year: "2025",
+    title: "Lancement du pôle défense des locataires",
+    desc: "Le pôle porte la voix des locataires, les aide dans leurs démarches et joue un rôle d'intermédiaire avec le bailleur social 3F.",
+  },
+  {
+    year: "2026",
+    title: "Nomination d'Aboubakar à la présidence",
+    desc: "Sa nomination vise à dynamiser l'activité de l'association et à y apporter son expertise au service du quartier.",
   },
 ];
 
@@ -90,11 +94,6 @@ const values = [
 
 const governance = [
   {
-    icon: Buildings,
-    title: "Conseil d'administration",
-    desc: "Il fixe les orientations stratégiques, vote les priorités et valide les grandes décisions.",
-  },
-  {
     icon: ShieldCheck,
     title: "Bureau",
     desc: "Il assure la gestion courante de l'association : pilotage, suivi financier et coordination des actions.",
@@ -107,27 +106,31 @@ const governance = [
 ];
 
 const bureau = [
-  { role: "Président", person: "Aboubakar MAHAMADOU" },
-  { role: "Vice-présidence", person: "Poste vacant" },
-  { role: "Trésorière", person: "Véronique GUIOUGOU-MURAT" },
-  { role: "Secrétaire", person: "Christine PANCRASSIN" },
+  { role: "Président", person: "Aboubakar" },
+  { role: "Trésorière", person: "Véronique" },
+  { role: "Secrétaire", person: "Christine" },
 ];
 
 const partners = [
   {
-    title: "Institutions",
-    intro: "En collaboration avec les acteurs publics locaux.",
-    logos: ["Mairie de Meaux", "Préfecture de Seine-et-Marne"],
+    name: "Mairie de Meaux",
+    logo: "https://upload.wikimedia.org/wikipedia/fr/thumb/b/bf/Logo_Meaux.svg/1920px-Logo_Meaux.svg.png?_=20180201204632",
+    category: "Institution",
   },
   {
-    title: "Bailleurs sociaux",
-    intro: "En lien avec les partenaires logement du territoire.",
-    logos: ["Immobilière 3F", "Acteurs habitat de proximité"],
+    name: "Préfecture de Seine-et-Marne",
+    logo: "https://upload.wikimedia.org/wikipedia/fr/thumb/f/f8/Pr%C3%A9fet_de_Seine-et-Marne.svg/500px-Pr%C3%A9fet_de_Seine-et-Marne.svg.png?_=20210421150709",
+    category: "Institution",
   },
   {
-    title: "Associations",
-    intro: "En coopération avec le tissu associatif de Beauval.",
-    logos: ["Associations locales de Meaux", "Collectifs habitants"],
+    name: "Groupe 3F",
+    logo: "https://www.groupe3f.fr/themes/custom/threef_theme/images/logo.svg",
+    category: "Bailleur social",
+  },
+  {
+    name: "Pays de Meaux Habitat",
+    logo: "https://www.pays-de-meaux-habitat.fr/wp-content/uploads/2024/01/logo-CMJN-pays-2024.png",
+    category: "Bailleur social",
   },
 ];
 
@@ -151,15 +154,15 @@ const fieldActions = [
 
 const fieldGallery = [
   {
-    src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=80",
+    src: "https://i.imgur.com/IHB9NJd.jpeg",
     alt: "Habitants réunis lors d'un événement associatif",
   },
   {
-    src: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1200&q=80",
+    src: "https://i.imgur.com/uTAwzy1.jpeg",
     alt: "Atelier collectif avec des jeunes et des familles",
   },
   {
-    src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=1200&q=80",
+    src: "https://i.imgur.com/SqbljKJ.jpeg",
     alt: "Bénévoles mobilisés sur une action locale",
   },
 ];
@@ -178,7 +181,7 @@ export function Association() {
               Une association engagée au cœur de Meaux
             </h1>
             <p className="mt-6 text-base md:text-lg leading-relaxed text-text-secondary max-w-[58ch]">
-              Depuis 2010, l&apos;AFIA agit à Beauval avec les familles du quartier.
+              Depuis 2010, AFIA agit à Beauval avec les familles du quartier.
               Notre approche est simple : être présents sur le terrain, écouter
               les besoins réels et construire des actions utiles, accessibles et
               concrètes.
@@ -254,27 +257,66 @@ export function Association() {
 
       {/* Mission */}
       <Section>
-        <FadeIn className="max-w-3xl mb-14">
-          <span className="text-xs font-medium tracking-widest uppercase text-primary">
-            Notre mission
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+          <FadeIn className="lg:col-span-4">
+            <span className="text-xs font-medium tracking-widest uppercase text-primary">
+              Notre mission
+            </span>
+            <h2 className="mt-3 font-heading text-3xl md:text-4xl font-bold tracking-tighter text-text-primary">
+              Transformer les besoins du quartier en actions utiles
+            </h2>
+          </FadeIn>
+
+          <StaggerContainer className="lg:col-span-8 divide-y divide-border-subtle">
+            {mission.map((item, i) => (
+              <StaggerItem key={item.title}>
+                <div className="flex gap-6 items-start py-7 first:pt-0 last:pb-0">
+                  <span className="font-heading text-4xl md:text-5xl font-bold text-primary-100 w-12 shrink-0 leading-none mt-1">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="flex gap-4 items-start">
+                    <div className="h-10 w-10 rounded-xl bg-primary-50 flex items-center justify-center shrink-0 mt-0.5">
+                      <item.icon size={20} weight="duotone" className="text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-lg font-semibold tracking-tight text-text-primary mb-1.5">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm md:text-base text-text-secondary leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </Section>
+
+      {/* Valeurs */}
+      <Section className="bg-primary-950">
+        <FadeIn className="mb-14 text-center">
+          <span className="text-xs font-medium tracking-widest uppercase text-primary-300">
+            Nos valeurs
           </span>
-          <h2 className="mt-3 font-heading text-3xl md:text-4xl font-bold tracking-tighter text-text-primary">
-            Transformer les besoins du quartier en actions utiles
+          <h2 className="mt-3 font-heading text-3xl md:text-4xl font-bold tracking-tighter text-white max-w-xl mx-auto">
+            Ce qui guide nos décisions au quotidien
           </h2>
         </FadeIn>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-          {mission.map((item) => (
-            <StaggerItem key={item.title}>
-              <div className="h-full rounded-2xl border border-border-subtle bg-surface-elevated p-7">
-                <div className="h-11 w-11 rounded-xl bg-primary-50 flex items-center justify-center mb-5">
-                  <item.icon size={22} weight="duotone" className="text-primary" />
+        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {values.map((v) => (
+            <StaggerItem key={v.title}>
+              <div className="group flex flex-col items-center text-center rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary-400/40 transition-all duration-300 p-7">
+                <div className="h-14 w-14 rounded-full bg-primary/20 flex items-center justify-center mb-5 group-hover:bg-primary/30 transition-colors duration-300">
+                  <v.icon size={26} weight="duotone" className="text-primary-200" />
                 </div>
-                <h3 className="font-heading text-xl font-semibold tracking-tight text-text-primary mb-2">
-                  {item.title}
+                <h3 className="font-heading text-base md:text-lg font-semibold tracking-tight text-white mb-2">
+                  {v.title}
                 </h3>
-                <p className="text-sm md:text-base text-text-secondary leading-relaxed">
-                  {item.desc}
+                <p className="text-xs md:text-sm text-primary-200 leading-relaxed">
+                  {v.desc}
                 </p>
               </div>
             </StaggerItem>
@@ -282,40 +324,8 @@ export function Association() {
         </StaggerContainer>
       </Section>
 
-      {/* Valeurs */}
-      <Section className="bg-surface-elevated">
-        <div className="mb-14">
-          <span className="text-xs font-medium tracking-widest uppercase text-primary">
-            Nos valeurs
-          </span>
-          <h2 className="mt-3 font-heading text-3xl md:text-4xl font-bold tracking-tighter text-text-primary max-w-xl">
-            Ce qui guide nos décisions au quotidien
-          </h2>
-        </div>
-
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-          {values.map((v) => (
-            <StaggerItem key={v.title}>
-              <div className="group flex gap-5 rounded-2xl border border-border-subtle bg-surface p-7 hover:border-primary-200 transition-colors duration-300">
-                <div className="h-11 w-11 rounded-xl bg-primary-50 flex items-center justify-center shrink-0 group-hover:bg-primary-100 transition-colors duration-300">
-                  <v.icon size={22} weight="duotone" className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-heading text-lg font-semibold tracking-tight text-text-primary mb-1.5">
-                    {v.title}
-                  </h3>
-                  <p className="text-sm md:text-base text-text-secondary leading-relaxed">
-                    {v.desc}
-                  </p>
-                </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </Section>
-
       {/* Gouvernance */}
-      <Section>
+      <Section className="bg-surface-elevated">
         <FadeIn className="max-w-3xl mb-14">
           <span className="text-xs font-medium tracking-widest uppercase text-primary">
             Gouvernance
@@ -325,85 +335,92 @@ export function Association() {
           </h2>
         </FadeIn>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mb-6">
-          {governance.map((item) => (
-            <StaggerItem key={item.title}>
-              <div className="h-full rounded-2xl border border-border-subtle bg-surface-elevated p-7">
-                <div className="h-11 w-11 rounded-xl bg-primary-50 flex items-center justify-center mb-5">
-                  <item.icon size={22} weight="duotone" className="text-primary" />
-                </div>
-                <h3 className="font-heading text-lg font-semibold tracking-tight text-text-primary mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-text-secondary leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-
-        <FadeIn delay={0.15}>
-          <div className="rounded-2xl border border-border-subtle bg-surface-elevated p-7 md:p-8">
-            <h3 className="font-heading text-xl font-semibold tracking-tight text-text-primary mb-4">
-              Bureau actuel
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {bureau.map((member) => (
-                <div
-                  key={member.role}
-                  className="rounded-xl border border-border-subtle bg-surface px-4 py-3"
-                >
-                  <p className="text-xs uppercase tracking-wider text-primary font-semibold">
-                    {member.role}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          {/* Cards gouvernance */}
+          <StaggerContainer className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+            {governance.map((item) => (
+              <StaggerItem key={item.title}>
+                <div className="rounded-2xl border border-border-subtle bg-surface p-7 relative overflow-hidden group hover:border-primary-200 hover:shadow-sm transition-all duration-300">
+                  <div className="absolute top-0 left-0 w-1 h-full rounded-l-2xl bg-primary-100 group-hover:bg-primary transition-colors duration-300" />
+                  <div className="h-12 w-12 rounded-xl bg-primary-50 flex items-center justify-center mb-5">
+                    <item.icon size={24} weight="duotone" className="text-primary" />
+                  </div>
+                  <h3 className="font-heading text-xl font-semibold tracking-tight text-text-primary mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm md:text-base text-text-secondary leading-relaxed">
+                    {item.desc}
                   </p>
-                  <p className="text-sm text-text-primary mt-1">{member.person}</p>
                 </div>
-              ))}
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+
+          {/* Bureau actuel */}
+          <FadeIn delay={0.1} className="lg:col-span-7">
+            <div className="rounded-2xl border border-border-subtle bg-surface overflow-hidden">
+              <div className="px-6 py-5 border-b border-border-subtle flex items-center gap-3">
+                <div className="h-1 w-8 rounded-full bg-primary" />
+                <h3 className="font-heading text-xl font-semibold tracking-tight text-text-primary">
+                  Bureau actuel
+                </h3>
+              </div>
+              <div className="p-6 grid grid-cols-1 gap-3">
+                {bureau.map((member) => (
+                  <div
+                    key={member.role}
+                    className="flex items-center justify-between rounded-xl border border-border-subtle bg-surface-elevated px-5 py-4"
+                  >
+                    <p className="text-[11px] uppercase tracking-wider text-primary font-semibold">
+                      {member.role}
+                    </p>
+                    <p className="text-sm font-medium text-text-primary">{member.person}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </FadeIn>
+          </FadeIn>
+        </div>
       </Section>
 
       {/* Partenaires */}
-      <Section className="bg-surface-elevated">
-        <FadeIn className="max-w-3xl mb-14">
+      <Section>
+        <FadeIn className="text-center mb-14">
           <span className="text-xs font-medium tracking-widest uppercase text-primary">
             Partenaires
           </span>
           <h2 className="mt-3 font-heading text-3xl md:text-4xl font-bold tracking-tighter text-text-primary">
             Ils nous font confiance
           </h2>
-          <p className="mt-4 text-base text-text-secondary leading-relaxed max-w-[60ch]">
+          <p className="mt-4 text-base text-text-secondary leading-relaxed max-w-[52ch] mx-auto">
             Des partenaires engagés à nos côtés pour renforcer l&apos;impact de nos
             actions sur le terrain.
           </p>
         </FadeIn>
 
-        <div className="space-y-8">
-          {partners.map((group) => (
-            <FadeIn key={group.title}>
-              <div className="rounded-2xl border border-border-subtle bg-surface p-6 md:p-7">
-                <h3 className="font-heading text-xl font-semibold tracking-tight text-text-primary">
-                  {group.title}
-                </h3>
-                <p className="mt-2 text-sm text-text-secondary">{group.intro}</p>
-                <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {group.logos.map((logo) => (
-                    <div
-                      key={logo}
-                      className="h-20 rounded-xl border border-border bg-surface-elevated flex items-center justify-center px-4 grayscale hover:grayscale-0 hover:border-primary-200 transition-all duration-300"
-                    >
-                      <p className="text-[11px] md:text-xs uppercase tracking-[0.14em] text-text-secondary text-center">
-                        {logo}
-                      </p>
-                    </div>
-                  ))}
+        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {partners.map((partner) => (
+            <StaggerItem key={partner.name}>
+              <div className="group flex flex-col items-center rounded-2xl border border-border-subtle bg-surface-elevated hover:border-primary-200 hover:shadow-sm transition-all duration-300 p-6 gap-4">
+                <div className="relative w-full h-16 flex items-center justify-center">
+                  <Image
+                    src={partner.logo}
+                    alt={`Logo ${partner.name}`}
+                    fill
+                    className="object-contain transition-all duration-300"
+                    sizes="(min-width: 768px) 20vw, 40vw"
+                  />
+                </div>
+                <div className="text-center">
+                  <p className="text-[11px] uppercase tracking-wider text-primary font-semibold">
+                    {partner.category}
+                  </p>
+                  <p className="text-xs text-text-secondary mt-0.5 leading-snug">{partner.name}</p>
                 </div>
               </div>
-            </FadeIn>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </Section>
 
       {/* Terrain */}

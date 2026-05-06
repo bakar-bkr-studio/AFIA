@@ -123,7 +123,7 @@ export function Projets() {
           <FadeIn className="lg:col-span-5">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-surface-muted">
               <Image
-                src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1400&q=80"
+                src="https://i.imgur.com/yzcueAS.jpeg"
                 alt="Repas collectif et convivial"
                 fill
                 className="object-cover"
@@ -315,7 +315,7 @@ export function Projets() {
           <FadeIn delay={0.1} className="lg:col-span-5">
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-surface-muted">
               <Image
-                src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1200&q=80"
+                src="https://i.imgur.com/NZm1meQ.jpeg"
                 alt="Famille en sortie de loisirs"
                 fill
                 className="object-cover"

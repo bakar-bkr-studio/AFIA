@@ -3,7 +3,6 @@
 import * as React from "react";
 import { motion, type Variants } from "framer-motion";
 
-/* Fade in from bottom — stagger children */
 const containerVariants: Variants = {
   hidden: {},
   visible: {
@@ -61,17 +60,18 @@ export function StaggerItem({
   );
 }
 
-/* Simple fade-in on scroll */
 export function FadeIn({
   children,
   className,
   delay = 0,
   direction = "up",
+  id,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   direction?: "up" | "down" | "left" | "right";
+  id?: string;
 }) {
   const directionMap = {
     up: { y: 24, x: 0 },
@@ -82,6 +82,7 @@ export function FadeIn({
 
   return (
     <motion.div
+      id={id}
       initial={{ opacity: 0, ...directionMap[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}

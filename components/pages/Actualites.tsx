@@ -127,7 +127,7 @@ export function Actualites() {
             Le fil d&apos;actu
           </h1>
           <p className="mt-6 text-base leading-relaxed text-text-secondary max-w-[60ch]">
-            {"Retrouvez ici tout ce qui se passe à l'AFIA, mais aussi les infos utiles de la Ville de Meaux pour les familles du quartier."}
+            {"Retrouvez ici tout ce qui se passe à AFIA, mais aussi les infos utiles de la Ville de Meaux pour les familles du quartier."}
           </p>
         </FadeIn>
       </Section>
@@ -160,7 +160,7 @@ export function Actualites() {
           </button>
         </div>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StaggerContainer key={tab} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((a) => (
             <StaggerItem key={a.title}>
               <article className="group h-full rounded-2xl overflow-hidden border border-border-subtle bg-surface hover:border-primary-200 transition-colors duration-300">

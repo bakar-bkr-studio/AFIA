@@ -112,7 +112,7 @@ export function ActualitesSection() {
             {"Actualités du moment"}
           </h2>
           <p className="mt-5 text-base text-text-secondary leading-relaxed max-w-[55ch]">
-            {"Ce qui se passe à l'AFIA et dans la Ville de Meaux. Un fil pour rester informé, utile même si vous n'êtes pas encore adhérent."}
+            {"Ce qui se passe à AFIA et dans la Ville de Meaux. Un fil pour rester informé, utile même si vous n'êtes pas encore adhérent."}
           </p>
         </div>
 
@@ -144,7 +144,7 @@ export function ActualitesSection() {
         </div>
       </FadeIn>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div key={tab} className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <FadeIn className="lg:col-span-7">
           <article className="group block h-full rounded-2xl overflow-hidden border border-border-subtle bg-surface hover:border-primary-200 transition-colors duration-300">
             <div className="relative aspect-[16/10] overflow-hidden">

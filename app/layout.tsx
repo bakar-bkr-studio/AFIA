@@ -1,28 +1,37 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Montserrat, Open_Sans, JetBrains_Mono } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
+  weight: ["400", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "AFIA — Association pour la Formation et l\u2019Insertion par l\u2019Action",
+    default: "AFIA — Association Familles d’Ici et d’Ailleurs",
     template: "%s | AFIA",
   },
   description:
-    "L\u2019AFIA accompagne, forme et soutient chaque parcours vers l\u2019insertion professionnelle et sociale.",
+    "Depuis 2010, AFIA rassemble les familles du quartier de Beauval à Meaux. Sorties, aide aux devoirs, repas citoyens — créer du lien, partager, construire ensemble.",
 };
 
 export default function RootLayout({
@@ -33,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${inter.variable} ${outfit.variable} antialiased`}
+      className={`${montserrat.variable} ${openSans.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <body className="min-h-[100dvh] flex flex-col bg-surface text-text-primary">
         <Header />
