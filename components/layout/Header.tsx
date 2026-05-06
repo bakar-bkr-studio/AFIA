@@ -40,7 +40,7 @@ export function Header() {
           <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-3">
             <div className="relative h-10 w-10 rounded-xl overflow-hidden">
               <Image
-                src="/images/logo-violet-mono.png"
+                src="/images/logo-violet-mono.webp"
                 alt="Logo AFIA"
                 fill
                 className="object-contain"
@@ -137,7 +137,7 @@ export function Header() {
                 <div className="flex items-center gap-3">
                   <div className="relative h-8 w-8 rounded-lg overflow-hidden">
                     <Image
-                      src="/images/logo-violet-mono.png"
+                      src="/images/logo-violet-mono.webp"
                       alt="Logo AFIA"
                       fill
                       className="object-contain"

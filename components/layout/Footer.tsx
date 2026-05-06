@@ -29,7 +29,7 @@ export function Footer() {
             <Link href="/" className="inline-flex items-center gap-3 mb-5">
               <div className="relative h-12 w-12">
                 <Image
-                  src="/images/logo-white.png"
+                  src="/images/logo-white.webp"
                   alt="Logo AFIA"
                   fill
                   className="object-contain"
