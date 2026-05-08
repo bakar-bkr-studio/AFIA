@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const MAINTENANCE_MODE = process.env.MAINTENANCE_MODE === "true";
+// NEXT_PUBLIC_ est obligatoire pour que la variable soit disponible
+// dans le Edge Runtime (middleware) au moment du build
+const MAINTENANCE_MODE = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true";
 const MAINTENANCE_PATH = "/maintenance";
 
 export function middleware(request: NextRequest) {
