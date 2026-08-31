@@ -12,7 +12,7 @@ const benefits = [
   "Voter lors des Assemblées Générales et prendre part aux décisions",
   "Être informé en priorité de nos événements, activités et projets",
   "Contribuer au lien social et à la vie du quartier de Beauval",
-  "Soutenir les actions éducatives, citoyennes et culturelles de l'AFIA",
+  "Soutenir les actions éducatives, citoyennes et culturelles d'AFIA",
 ];
 
 export function Adhesion() {

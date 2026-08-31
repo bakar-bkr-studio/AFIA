@@ -79,8 +79,9 @@ export function Footer() {
             <ul className="space-y-3">
               {[
                 { name: "L'Association", href: "/association" },
-                { name: "Activités", href: "/activites" },
-                { name: "Projets", href: "/projets" },
+                { name: "Pôle ludique", href: "/pole-ludique" },
+                { name: "Pôle sociétal", href: "/pole-societal" },
+                { name: "Pôle jeunesse", href: "/pole-jeunesse" },
                 { name: "Actualités", href: "/actualites" },
                 { name: "Adhésion", href: "/adhesion" },
               ].map((link) => (

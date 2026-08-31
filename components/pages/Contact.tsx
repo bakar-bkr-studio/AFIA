@@ -81,22 +81,42 @@ export function Contact() {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState(subjectOptions[0]);
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState("");
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [submitMessage, setSubmitMessage] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSubmitStatus("sending");
+    setSubmitMessage("");
 
-    const mailSubject = `[Site AFIA] ${subject} - ${name || "Contact"}`;
-    const mailBody = [
-      `Nom / Prénom : ${name}`,
-      `Email : ${email}`,
-      `Sujet : ${subject}`,
-      "",
-      "Message :",
-      message,
-    ].join("\n");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, subject, message, website }),
+      });
+      const result = (await response.json()) as { error?: string };
 
-    const mailtoUrl = `mailto:${contactEmail}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
-    window.location.href = mailtoUrl;
+      if (!response.ok) {
+        throw new Error(result.error ?? "L’envoi a échoué. Veuillez réessayer.");
+      }
+
+      setSubmitStatus("success");
+      setSubmitMessage("Votre message a bien été envoyé. L’équipe AFIA vous répondra dès que possible.");
+      setName("");
+      setEmail("");
+      setSubject(subjectOptions[0]);
+      setMessage("");
+      setWebsite("");
+    } catch (error) {
+      setSubmitStatus("error");
+      setSubmitMessage(
+        error instanceof Error
+          ? error.message
+          : "L’envoi a échoué. Veuillez réessayer ou nous écrire directement."
+      );
+    }
   }
 
   return (
@@ -209,10 +229,32 @@ export function Contact() {
                   />
                 </div>
 
-                <Button type="submit" size="lg">
-                  Envoyer ma demande
+                <div className="sr-only" aria-hidden="true">
+                  <label htmlFor="website">Site internet</label>
+                  <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
+                <Button type="submit" size="lg" disabled={submitStatus === "sending"}>
+                  {submitStatus === "sending" ? "Envoi en cours…" : "Envoyer ma demande"}
                   <ArrowRight size={18} weight="bold" />
                 </Button>
+
+                {submitMessage && (
+                  <p
+                    className={submitStatus === "success" ? "text-sm text-primary" : "text-sm text-red-700"}
+                    role={submitStatus === "error" ? "alert" : "status"}
+                  >
+                    {submitMessage}
+                  </p>
+                )}
               </form>
             </div>
           </FadeIn>

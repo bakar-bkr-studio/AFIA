@@ -35,7 +35,7 @@ const actusAfia: Actu[] = [
     excerpt:
       "Retour sur un moment fort de l'année : jeunes et parents réunis autour d'un grand repas citoyen.",
     image:
-      "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=700&q=80",
+      "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=80",
   },
   {
     category: "Programme",
@@ -44,7 +44,7 @@ const actusAfia: Actu[] = [
     excerpt:
       "Le programme d'accompagnement scolaire continue pour les élèves du primaire et du collège.",
     image:
-      "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=700&q=80",
+      "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=1000&q=80",
   },
   {
     category: "À venir",
@@ -53,7 +53,7 @@ const actusAfia: Actu[] = [
     excerpt:
       "Un tournoi à 5 pour réunir jeunes et adultes du quartier autour du sport.",
     image:
-      "https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=700&q=80",
+      "https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=1000&q=80",
   },
 ];
 
@@ -74,7 +74,7 @@ const actusMeaux: Actu[] = [
     excerpt:
       "Le Centre Communal d'Action Sociale tient des permanences pour accompagner les habitants dans leurs démarches.",
     image:
-      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=700&q=80",
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1000&q=80",
   },
   {
     category: "Culture",
@@ -83,7 +83,7 @@ const actusMeaux: Actu[] = [
     excerpt:
       "Découvrez la nouvelle saison culturelle du Colisée, partenaire régulier de nos événements.",
     image:
-      "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=700&q=80",
+      "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=1000&q=80",
   },
   {
     category: "Jeunesse",
@@ -92,17 +92,23 @@ const actusMeaux: Actu[] = [
     excerpt:
       "La Préfecture de Seine-et-Marne soutient les actions de prévention menées par les associations locales.",
     image:
-      "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=700&q=80",
+      "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1000&q=80",
   },
 ];
 
 export function ActualitesSection() {
   const [tab, setTab] = React.useState<"afia" | "meaux">("afia");
+  const [activeIdx, setActiveIdx] = React.useState(0);
   const items = tab === "afia" ? actusAfia : actusMeaux;
-  const [featured, ...rest] = items;
+  const featured = items[activeIdx];
+
+  function selectTab(next: "afia" | "meaux") {
+    setTab(next);
+    setActiveIdx(0);
+  }
 
   return (
-    <Section>
+    <Section className="pt-12 md:pt-16">
       <FadeIn className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
         <div className="max-w-2xl">
           <span className="text-xs font-medium tracking-widest uppercase text-primary">
@@ -119,7 +125,7 @@ export function ActualitesSection() {
         <div className="inline-flex items-center gap-1 p-1 rounded-full border border-border-subtle bg-surface-elevated self-start md:self-auto">
           <button
             type="button"
-            onClick={() => setTab("afia")}
+            onClick={() => selectTab("afia")}
             className={cn(
               "px-4 py-2 text-sm font-medium rounded-full transition-colors",
               tab === "afia"
@@ -131,7 +137,7 @@ export function ActualitesSection() {
           </button>
           <button
             type="button"
-            onClick={() => setTab("meaux")}
+            onClick={() => selectTab("meaux")}
             className={cn(
               "px-4 py-2 text-sm font-medium rounded-full transition-colors",
               tab === "meaux"
@@ -145,14 +151,15 @@ export function ActualitesSection() {
       </FadeIn>
 
       <div key={tab} className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <FadeIn className="lg:col-span-7">
-          <article className="group block h-full rounded-2xl overflow-hidden border border-border-subtle bg-surface hover:border-primary-200 transition-colors duration-300">
+        {/* Actu mise en avant */}
+        <FadeIn key={activeIdx} className="lg:col-span-7">
+          <article className="block h-full rounded-2xl overflow-hidden border border-border-subtle bg-surface">
             <div className="relative aspect-[16/10] overflow-hidden">
               <Image
                 src={featured.image}
                 alt={featured.title}
                 fill
-                className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                className="object-cover"
                 sizes="(min-width: 1024px) 58vw, 100vw"
               />
             </div>
@@ -174,36 +181,57 @@ export function ActualitesSection() {
           </article>
         </FadeIn>
 
+        {/* Liste cliquable */}
         <div className="lg:col-span-5 flex flex-col gap-4">
-          {rest.map((a, i) => (
-            <FadeIn key={a.title} delay={0.05 * (i + 1)}>
-              <article className="group flex gap-4 rounded-2xl border border-border-subtle bg-surface p-4 hover:border-primary-200 transition-colors duration-300">
-                <div className="relative h-24 w-24 shrink-0 rounded-xl overflow-hidden bg-surface-muted">
-                  <Image
-                    src={a.image}
-                    alt={a.title}
-                    fill
-                    className="object-cover"
-                    sizes="96px"
-                  />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="outline" className="text-[10px] py-0.5 px-2">
-                      {a.category}
-                    </Badge>
-                    <span className="text-[11px] text-text-muted">{a.date}</span>
+          {items.map((a, i) => {
+            const isActive = i === activeIdx;
+            return (
+              <FadeIn key={a.title} delay={0.05 * (i + 1)}>
+                <button
+                  type="button"
+                  onClick={() => setActiveIdx(i)}
+                  aria-pressed={isActive}
+                  className={cn(
+                    "group flex w-full gap-4 rounded-2xl border bg-surface p-4 text-left transition-all duration-300 cursor-pointer",
+                    isActive
+                      ? "border-primary ring-1 ring-primary/25 bg-primary-50/60"
+                      : "border-border-subtle hover:border-primary-200 hover:bg-surface-elevated"
+                  )}
+                >
+                  <div className="relative h-24 w-24 shrink-0 rounded-xl overflow-hidden bg-surface-muted">
+                    <Image
+                      src={a.image}
+                      alt={a.title}
+                      fill
+                      className="object-cover"
+                      sizes="96px"
+                    />
                   </div>
-                  <h4 className="font-heading text-sm font-semibold tracking-tight text-text-primary leading-snug mb-1 line-clamp-2">
-                    {a.title}
-                  </h4>
-                  <p className="text-xs text-text-secondary leading-relaxed line-clamp-2">
-                    {a.excerpt}
-                  </p>
-                </div>
-              </article>
-            </FadeIn>
-          ))}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Badge variant="outline" className="text-[10px] py-0.5 px-2">
+                        {a.category}
+                      </Badge>
+                      <span className="text-[11px] text-text-muted">{a.date}</span>
+                    </div>
+                    <h4
+                      className={cn(
+                        "font-heading text-sm font-semibold tracking-tight leading-snug mb-1 line-clamp-2 transition-colors",
+                        isActive
+                          ? "text-primary"
+                          : "text-text-primary group-hover:text-primary"
+                      )}
+                    >
+                      {a.title}
+                    </h4>
+                    <p className="text-xs text-text-secondary leading-relaxed line-clamp-2">
+                      {a.excerpt}
+                    </p>
+                  </div>
+                </button>
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
 

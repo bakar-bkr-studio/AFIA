@@ -9,6 +9,18 @@ const MAINTENANCE_PATH = "/maintenance";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Redirections des anciennes routes vers les nouvelles pages de pôles
+  const redirects: Record<string, string> = {
+    "/activites": "/pole-ludique",
+    "/projets": "/pole-societal",
+  };
+
+  if (redirects[pathname]) {
+    const url = request.nextUrl.clone();
+    url.pathname = redirects[pathname];
+    return NextResponse.redirect(url, 301);
+  }
+
   // Si le mode maintenance est actif...
   if (MAINTENANCE_MODE) {
     // ...laisser passer les assets statiques et la page maintenance elle-même
@@ -18,7 +30,9 @@ export function middleware(request: NextRequest) {
       pathname.startsWith("/icons") ||
       pathname.startsWith("/images") ||
       pathname.startsWith("/fonts") ||
-      pathname === MAINTENANCE_PATH;
+      pathname === MAINTENANCE_PATH ||
+      // Cette adresse reste disponible pour le QR code, même pendant la maintenance.
+      pathname === "/evenement";
 
     if (!isStaticAsset) {
       const url = request.nextUrl.clone();

@@ -3,7 +3,19 @@
     "allow": [
       "mcp__Claude_Preview__preview_start",
       "mcp__Claude_in_Chrome__tabs_context_mcp",
-      "Bash(kill 9305)"
+      "Bash(kill 9305)",
+      "Bash(npx tsc *)",
+      "Bash(gh api *)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} -> %{redirect_url}\\\\n\" \"http://localhost:3000/pole-jeunesse\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://localhost:3000/pole-jeunesse\")",
+      "Bash(ps -p 37321 -o pid,command)",
+      "Bash(curl -s \"http://localhost:3000/pole-jeunesse\" -o /tmp/pj.html)",
+      "Bash(curl -s \"http://localhost:3000/pole-ludique\" -o /tmp/pl.html)",
+      "Bash(curl -s \"http://localhost:3000/pole-societal\" -o /tmp/ps.html)",
+      "Read(//tmp/**)",
+      "Bash(curl -s \"http://localhost:3000/\" -o /tmp/home.html)",
+      "Bash(curl -s \"http://localhost:3000/association\" -o /tmp/assoc.html)"
     ]
   }
 }

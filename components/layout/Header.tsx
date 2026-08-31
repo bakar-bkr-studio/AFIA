@@ -1,25 +1,46 @@
 "use client";
 
 import Link from "next/link";
-import { List, X } from "@phosphor-icons/react";
+import { List, X, CaretDown } from "@phosphor-icons/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import * as React from "react";
 
+const polesItems = [
+  { name: "Pôle ludique", href: "/pole-ludique" },
+  { name: "Pôle sociétal", href: "/pole-societal" },
+  { name: "Pôle jeunesse", href: "/pole-jeunesse" },
+];
+
 const navigation = [
   { name: "Accueil", href: "/" },
-  { name: "L’Association", href: "/association" },
-  { name: "Activités", href: "/activites" },
-  { name: "Projets", href: "/projets" },
+  { name: "L'Association", href: "/association" },
+  { name: "Nos pôles", href: "#", children: polesItems },
   { name: "Actualités", href: "/actualites" },
   { name: "Contact", href: "/contact" },
 ];
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [polesOpen, setPolesOpen] = React.useState(false);
+  const [mobilePolesOpen, setMobilePolesOpen] = React.useState(false);
   const pathname = usePathname();
+  const polesRef = React.useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  React.useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (polesRef.current && !polesRef.current.contains(e.target as Node)) {
+        setPolesOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const isPolesActive = polesItems.some((p) => pathname === p.href);
 
   return (
     <header
@@ -60,7 +81,7 @@ export function Header() {
             >
               Association Familles
               <br />
-              {"d’Ici et d’Ailleurs"}
+              {"d'Ici et d'Ailleurs"}
             </div>
           </Link>
         </div>
@@ -68,6 +89,67 @@ export function Header() {
         {/* Desktop nav */}
         <div className="hidden lg:flex lg:gap-x-1">
           {navigation.map((item) => {
+            if (item.children) {
+              return (
+                <div key={item.name} className="relative" ref={polesRef}>
+                  <button
+                    type="button"
+                    onClick={() => setPolesOpen(!polesOpen)}
+                    className={cn(
+                      "relative px-4 py-2 text-sm font-medium transition-colors duration-200 inline-flex items-center gap-1 cursor-pointer",
+                      isPolesActive
+                        ? "text-primary-700"
+                        : "text-text-secondary hover:text-text-primary"
+                    )}
+                  >
+                    {item.name}
+                    <CaretDown
+                      size={13}
+                      weight="bold"
+                      className={cn(
+                        "transition-transform duration-200",
+                        polesOpen && "rotate-180"
+                      )}
+                    />
+                    {isPolesActive && (
+                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[18px] h-[2px] rounded-full bg-accent" />
+                    )}
+                  </button>
+
+                  <AnimatePresence>
+                    {polesOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 6 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-52 rounded-xl border border-border-subtle bg-surface-elevated shadow-lg py-2 z-50"
+                      >
+                        {item.children.map((child) => {
+                          const isChildActive = pathname === child.href;
+                          return (
+                            <Link
+                              key={child.name}
+                              href={child.href}
+                              onClick={() => setPolesOpen(false)}
+                              className={cn(
+                                "block px-4 py-2.5 text-sm font-medium transition-colors duration-150",
+                                isChildActive
+                                  ? "text-primary-700 bg-primary-50"
+                                  : "text-text-secondary hover:text-text-primary hover:bg-surface-muted"
+                              )}
+                            >
+                              {child.name}
+                            </Link>
+                          );
+                        })}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            }
+
             const isActive = pathname === item.href;
             return (
               <Link
@@ -159,6 +241,65 @@ export function Header() {
               <div className="px-6 pb-8 pt-4">
                 <div className="space-y-1">
                   {navigation.map((item) => {
+                    if (item.children) {
+                      return (
+                        <div key={item.name}>
+                          <button
+                            type="button"
+                            onClick={() => setMobilePolesOpen(!mobilePolesOpen)}
+                            className={cn(
+                              "w-full flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium transition-colors cursor-pointer",
+                              isPolesActive
+                                ? "text-primary-700 bg-primary-50"
+                                : "text-text-secondary hover:text-text-primary hover:bg-surface-muted"
+                            )}
+                          >
+                            {item.name}
+                            <CaretDown
+                              size={16}
+                              weight="bold"
+                              className={cn(
+                                "transition-transform duration-200",
+                                mobilePolesOpen && "rotate-180"
+                              )}
+                            />
+                          </button>
+                          <AnimatePresence>
+                            {mobilePolesOpen && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="pl-4 space-y-1 mt-1">
+                                  {item.children.map((child) => {
+                                    const isChildActive = pathname === child.href;
+                                    return (
+                                      <Link
+                                        key={child.name}
+                                        href={child.href}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className={cn(
+                                          "block rounded-xl px-4 py-2.5 text-sm font-medium transition-colors",
+                                          isChildActive
+                                            ? "text-primary-700 bg-primary-50"
+                                            : "text-text-secondary hover:text-text-primary hover:bg-surface-muted"
+                                        )}
+                                      >
+                                        {child.name}
+                                      </Link>
+                                    );
+                                  })}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      );
+                    }
+
                     const isActive = pathname === item.href;
                     return (
                       <Link

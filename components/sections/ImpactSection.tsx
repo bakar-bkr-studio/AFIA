@@ -10,13 +10,13 @@ const stats = [
     sub: "Colisée de Meaux · 2 mars 2026",
   },
   {
-    value: "60",
+    value: "10",
     label: "Jeunes accompagnés",
     sub: "Programme aide aux devoirs",
   },
   {
-    value: "6",
-    label: "Sorties familles",
+    value: "5",
+    label: "Événements de familles",
     sub: "Avril → août 2026",
   },
   {

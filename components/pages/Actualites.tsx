@@ -2,10 +2,11 @@
 
 import * as React from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { Section } from "@/components/ui/Section";
 import { Badge } from "@/components/ui/Badge";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
-import { CalendarDots } from "@phosphor-icons/react";
+import { CalendarDots, X } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
 type Actu = {
@@ -114,7 +115,21 @@ const actusMeaux: Actu[] = [
 
 export function Actualites() {
   const [tab, setTab] = React.useState<"afia" | "meaux">("afia");
+  const [selected, setSelected] = React.useState<Actu | null>(null);
   const items = tab === "afia" ? actusAfia : actusMeaux;
+
+  React.useEffect(() => {
+    if (!selected) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelected(null);
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [selected]);
 
   return (
     <>
@@ -160,10 +175,17 @@ export function Actualites() {
           </button>
         </div>
 
-        <StaggerContainer key={tab} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StaggerContainer
+          key={tab}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {items.map((a) => (
             <StaggerItem key={a.title}>
-              <article className="group h-full rounded-2xl overflow-hidden border border-border-subtle bg-surface hover:border-primary-200 transition-colors duration-300">
+              <button
+                type="button"
+                onClick={() => setSelected(a)}
+                className="group h-full w-full text-left rounded-2xl overflow-hidden border border-border-subtle bg-surface hover:border-primary-200 hover:shadow-sm transition-all duration-300 cursor-pointer"
+              >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
                     src={a.image}
@@ -181,18 +203,78 @@ export function Actualites() {
                       {a.date}
                     </span>
                   </div>
-                  <h3 className="font-heading text-lg font-semibold tracking-tight text-text-primary mb-2">
+                  <h3 className="font-heading text-lg font-semibold tracking-tight text-text-primary mb-2 group-hover:text-primary transition-colors">
                     {a.title}
                   </h3>
                   <p className="text-sm text-text-secondary leading-relaxed">
                     {a.excerpt}
                   </p>
                 </div>
-              </article>
+              </button>
             </StaggerItem>
           ))}
         </StaggerContainer>
       </Section>
+
+      {/* Popup actualité */}
+      <AnimatePresence>
+        {selected && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div
+              className="absolute inset-0 bg-primary-950/70 backdrop-blur-sm"
+              onClick={() => setSelected(null)}
+            />
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label={selected.title}
+              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-surface shadow-2xl"
+              initial={{ opacity: 0, scale: 0.96, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 16 }}
+              transition={{ type: "spring", stiffness: 240, damping: 24 }}
+            >
+              <div className="relative aspect-[16/9]">
+                <Image
+                  src={selected.image}
+                  alt={selected.title}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 672px) 640px, 100vw"
+                />
+                <button
+                  type="button"
+                  onClick={() => setSelected(null)}
+                  aria-label="Fermer"
+                  className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-text-primary shadow-md transition-colors"
+                >
+                  <X size={18} weight="bold" />
+                </button>
+              </div>
+              <div className="p-7 md:p-9">
+                <div className="flex items-center gap-3 mb-4">
+                  <Badge variant="primary">{selected.category}</Badge>
+                  <span className="flex items-center gap-1.5 text-xs text-text-muted">
+                    <CalendarDots size={14} weight="duotone" />
+                    {selected.date}
+                  </span>
+                </div>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold tracking-tight text-text-primary mb-4">
+                  {selected.title}
+                </h2>
+                <p className="text-base text-text-secondary leading-relaxed">
+                  {selected.excerpt}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
