@@ -41,7 +41,7 @@ const timeline = [
   {
     year: "Aujourd'hui",
     title: "Une organisation en trois pôles",
-    desc: "L'association s'articule autour de trois pôles complémentaires — ludique, sociétal et jeunesse — ce dernier réunissant une cinquantaine de jeunes bénévoles de Meaux.",
+    desc: "L'association réunit trois pôles complémentaires : le pôle ludique, le pôle sociétal et le pôle jeunesse. Ce dernier rassemble une cinquantaine de jeunes bénévoles à Meaux.",
   },
 ];
 
@@ -156,6 +156,21 @@ const partners = [
     name: "Pays de Meaux Habitat",
     logo: "https://www.pays-de-meaux-habitat.fr/wp-content/uploads/2024/01/logo-CMJN-pays-2024.png",
     category: "Bailleur social",
+  },
+  {
+    name: "Mission locale",
+    logo: "/images/partners/mission-locale.png",
+    category: "Insertion professionnelle",
+  },
+  {
+    name: "CIO de Créteil",
+    logo: "/images/partners/cio-creteil.webp",
+    category: "Orientation",
+  },
+  {
+    name: "E2C 77",
+    logo: "/images/partners/e2c-77.png",
+    category: "Formation et insertion",
   },
 ];
 

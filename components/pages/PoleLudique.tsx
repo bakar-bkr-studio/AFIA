@@ -6,15 +6,11 @@ import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import {
-  CalendarBlank,
   Confetti,
   EnvelopeSimple,
   HandHeart,
-  MapPin,
   Palette,
   Sparkle,
-  Star,
-  Sun,
   Train,
   UsersThree,
 } from "@phosphor-icons/react";
@@ -43,7 +39,7 @@ const mainActions = [
       "Disneyland Paris",
       "Plage de Fort-Mahon",
       "Plage de Cabourg",
-      "Plage de Dieppe",
+      "Sorties pour les vacances",
     ],
     accent: true,
   },
@@ -80,36 +76,34 @@ const mainActions = [
   },
 ];
 
-const upcomingProjects = [
+// Images de remplacement à substituer par des photos AFIA validées.
+const galleryPhotos = [
   {
-    icon: Sun,
-    title: "Programme Quartier d'été 2026",
-    date: "Avril – Août 2026",
-    status: "En cours",
-    desc: "Quatre sorties ouvertes à toutes les familles : Aventure Land, plage de Dieppe, Fort-Mahon et Nigloland.",
+    src: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1200&q=80",
+    alt: "Photo d'illustration pour une sortie en famille",
+    className: "col-span-2 row-span-2",
   },
   {
-    icon: Star,
-    title: "Journée festive à l'espace Bessières",
-    date: "Vendredi 21 août 2026 · 14h – 18h",
-    status: "À venir",
-    desc: "Après-midi gratuite ouverte à tous les habitants — scène ouverte, jeux extérieurs, structures gonflables, buvette et tombola. 200 à 300 personnes attendues.",
+    src: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=900&q=80",
+    alt: "Photo d'illustration pour une activité de loisirs",
   },
-];
-
-const summerTrips = [
-  { date: "16 juillet", label: "Aventure Land", lieu: "Magny-en-Vexin" },
-  { date: "29 juillet", label: "Plage de Dieppe", lieu: "Dieppe", cancelled: true },
-  { date: "10 août", label: "Plage de Fort-Mahon", lieu: "Fort-Mahon" },
-  { date: "18 août", label: "Nigloland", lieu: "Dolancourt" },
-  { date: "21 août", label: "Journée festive à l’espace Bessières", lieu: "Meaux" },
-];
-
-const highlights = [
-  { title: "Sortie Mer de Sables", lieu: "Ermenonville", year: "2025" },
-  { title: "Sortie Five Arena", lieu: "Meaux", year: "2025" },
-  { title: "Marché de Noël de Reims", lieu: "Reims", year: "2025" },
-  { title: "Activités vacances de Noël", lieu: "Meaux", year: "2025" },
+  {
+    src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80",
+    alt: "Photo d'illustration pour une sortie à la plage",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=1200&q=80",
+    alt: "Photo d'illustration pour un atelier créatif",
+    className: "col-span-2",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=900&q=80",
+    alt: "Photo d'illustration pour une animation collective",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=80",
+    alt: "Photo d'illustration pour un moment convivial",
+  },
 ];
 
 /* ── Composant ── */
@@ -308,139 +302,41 @@ export function PoleLudique() {
         </StaggerContainer>
       </Section>
 
-      {/* ════ Projets en cours + sorties d'été ════ */}
+      {/* ════ Galerie photos ════ */}
       <Section>
-        <FadeIn className="max-w-3xl mb-14">
-          <span className="eyebrow text-accent mb-3">Projets en cours</span>
-          <h2 className="font-heading font-black text-[clamp(28px,3.5vw,44px)] tracking-[-0.025em] text-primary-950 leading-[1.05]">
-            Ce qui se prépare<br />pour 2026.
-          </h2>
-        </FadeIn>
-
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-8">
-          {upcomingProjects.map((project) => (
-            <StaggerItem key={project.title}>
-              <div className="h-full rounded-3xl border border-border-subtle bg-surface-elevated p-8">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="h-14 w-14 rounded-2xl bg-accent-100/60 flex items-center justify-center">
-                    <project.icon size={28} weight="duotone" className="text-accent-700" />
-                  </div>
-                  <span
-                    className={`text-[11px] uppercase tracking-[0.14em] font-semibold px-3 py-1.5 rounded-full ${
-                      project.status === "En cours"
-                        ? "bg-accent text-white"
-                        : "bg-surface-muted text-text-secondary border border-border-subtle"
-                    }`}
-                  >
-                    {project.status}
-                  </span>
-                </div>
-                <p className="eyebrow text-text-muted mb-2">{project.date}</p>
-                <h3 className="font-heading font-bold text-2xl leading-tight tracking-tight text-text-primary mb-3">
-                  {project.title}
-                </h3>
-                <p className="text-base text-text-secondary leading-relaxed">
-                  {project.desc}
-                </p>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-
-        {/* Timeline sorties d'été */}
-        <FadeIn delay={0.15}>
-          <div className="rounded-3xl border border-border-subtle bg-surface-elevated p-7 md:p-10">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-              <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-2xl bg-accent text-white flex items-center justify-center">
-                  <Train size={22} weight="duotone" />
-                </div>
-                <div>
-                  <span className="eyebrow text-accent">
-                    Programme sorties d'été 2026
-                  </span>
-                  <p className="mt-1 font-heading font-bold text-xl tracking-tight text-text-primary">
-                    Quatre sorties d'été
-                  </p>
-                </div>
-              </div>
-              <p className="text-xs text-text-muted">
-                Ouvertes à tout public — juillet & août 2026
-              </p>
-            </div>
-
-            <ol className="relative border-l-2 border-dashed border-accent/30 ml-3 md:ml-5 space-y-5">
-              {summerTrips.map((trip, i) => (
-                <li key={trip.label} className="pl-6 md:pl-8 relative">
-                  <span
-                    className={`absolute -left-[10px] top-1 h-5 w-5 rounded-full text-white text-[10px] font-bold flex items-center justify-center ring-4 ring-surface-elevated ${
-                      trip.cancelled ? "bg-text-muted" : "bg-accent"
-                    }`}
-                  >
-                    {i + 1}
-                  </span>
-                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                    <div>
-                      <p className="eyebrow text-accent-700">{trip.date}</p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <p
-                          className={`font-heading font-bold text-lg leading-tight tracking-tight ${
-                            trip.cancelled ? "line-through text-text-muted" : "text-text-primary"
-                          }`}
-                        >
-                          {trip.label}
-                        </p>
-                        {trip.cancelled && (
-                          <span className="text-[10px] uppercase tracking-[0.12em] font-semibold px-2 py-0.5 rounded-full bg-red-100 text-red-600">
-                            Annulée
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <p className="text-xs text-text-muted flex items-center gap-1.5">
-                      <MapPin size={12} weight="duotone" />
-                      {trip.lieu}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+        <FadeIn className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10">
+          <div className="max-w-2xl">
+            <span className="eyebrow text-accent mb-3">La vie du pôle</span>
+            <h2 className="font-heading font-black text-[clamp(28px,3.5vw,44px)] tracking-[-0.025em] text-primary-950 leading-[1.05]">
+              Nos sorties en images.
+            </h2>
           </div>
-        </FadeIn>
-      </Section>
-
-      {/* ════ Temps forts réalisés ════ */}
-      <Section className="bg-surface-muted">
-        <FadeIn className="max-w-3xl mb-14">
-          <span className="eyebrow text-accent mb-3">Temps forts</span>
-          <h2 className="font-heading font-black text-[clamp(28px,3.5vw,44px)] tracking-[-0.025em] text-primary-950 leading-[1.05]">
-            Ce que nous avons<br />déjà réalisé.
-          </h2>
+          <p className="max-w-[42ch] text-sm md:text-base leading-relaxed text-text-secondary">
+            Des sorties, des animations et des moments partagés avec les familles du quartier.
+          </p>
         </FadeIn>
 
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-          {highlights.map((item) => (
-            <StaggerItem key={item.title}>
-              <div className="h-full rounded-3xl border border-border-subtle bg-surface-elevated p-6 hover:border-accent/40 transition-colors duration-300">
-                <div className="flex items-center gap-2 mb-4">
-                  <CalendarBlank size={13} weight="duotone" className="text-accent" />
-                  <span className="text-xs uppercase tracking-[0.14em] text-accent font-semibold">
-                    {item.year}
-                  </span>
-                </div>
-                <h3 className="font-heading font-bold text-base leading-snug tracking-tight text-text-primary mb-2">
-                  {item.title}
-                </h3>
-                {item.lieu !== "—" && (
-                  <p className="text-xs text-text-muted flex items-center gap-1.5">
-                    <MapPin size={11} weight="duotone" />
-                    {item.lieu}
-                  </p>
-                )}
-              </div>
-            </StaggerItem>
+        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[132px] sm:auto-rows-[180px] md:auto-rows-[200px] gap-3 md:gap-4">
+          {galleryPhotos.map((photo, index) => (
+            <FadeIn
+              key={photo.src}
+              delay={index * 0.05}
+              className={`relative overflow-hidden rounded-2xl bg-surface-muted ${photo.className ?? ""}`}
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                className="object-cover transition-transform duration-500 hover:scale-105"
+                sizes={
+                  index === 0 || photo.className === "col-span-2"
+                    ? "(min-width: 768px) 50vw, 100vw"
+                    : "(min-width: 768px) 25vw, 50vw"
+                }
+              />
+            </FadeIn>
           ))}
-        </StaggerContainer>
+        </div>
       </Section>
 
       {/* ════ CTA ════ */}

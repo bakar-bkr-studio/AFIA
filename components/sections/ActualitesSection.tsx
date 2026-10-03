@@ -9,103 +9,20 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/Motion";
 import { cn } from "@/lib/utils";
-
-type Actu = {
-  category: string;
-  title: string;
-  date: string;
-  excerpt: string;
-  image: string;
-};
-
-const actusAfia: Actu[] = [
-  {
-    category: "Sortie",
-    title: "Aventure Land : sortie parc le 16 juillet",
-    date: "Juillet 2026",
-    excerpt:
-      "Inscriptions ouvertes pour la grande sortie familiale au parc d'attractions dans les arbres. 60 places disponibles.",
-    image:
-      "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=1000&q=80",
-  },
-  {
-    category: "Événement",
-    title: "Repas solidaire au Colisée : 230 participants",
-    date: "Mars 2026",
-    excerpt:
-      "Retour sur un moment fort de l'année : jeunes et parents réunis autour d'un grand repas citoyen.",
-    image:
-      "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=80",
-  },
-  {
-    category: "Programme",
-    title: "Aide aux devoirs : deux séances par semaine",
-    date: "Toute l'année",
-    excerpt:
-      "Le programme d'accompagnement scolaire continue pour les élèves du primaire et du collège.",
-    image:
-      "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=1000&q=80",
-  },
-  {
-    category: "À venir",
-    title: "Tournoi de foot intergénérationnel en août",
-    date: "Août 2026",
-    excerpt:
-      "Un tournoi à 5 pour réunir jeunes et adultes du quartier autour du sport.",
-    image:
-      "https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=1000&q=80",
-  },
-];
-
-const actusMeaux: Actu[] = [
-  {
-    category: "Ville",
-    title: "Quartier d'été 2026 : programmation municipale",
-    date: "Juillet – Août",
-    excerpt:
-      "La Ville de Meaux lance la saison des animations estivales dans les quartiers. Suivez le programme officiel.",
-    image:
-      "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1000&q=80",
-  },
-  {
-    category: "Dispositif",
-    title: "Aides au logement : permanences CCAS",
-    date: "Permanent",
-    excerpt:
-      "Le Centre Communal d'Action Sociale tient des permanences pour accompagner les habitants dans leurs démarches.",
-    image:
-      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1000&q=80",
-  },
-  {
-    category: "Culture",
-    title: "Colisée de Meaux : saison 2026",
-    date: "Septembre 2026",
-    excerpt:
-      "Découvrez la nouvelle saison culturelle du Colisée, partenaire régulier de nos événements.",
-    image:
-      "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=1000&q=80",
-  },
-  {
-    category: "Jeunesse",
-    title: "Prévention rixes : dispositif préfecture",
-    date: "2026",
-    excerpt:
-      "La Préfecture de Seine-et-Marne soutient les actions de prévention menées par les associations locales.",
-    image:
-      "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1000&q=80",
-  },
-];
+import { actusAfia, actusMeaux } from "@/lib/actualites";
 
 export function ActualitesSection() {
   const [tab, setTab] = React.useState<"afia" | "meaux">("afia");
   const [activeIdx, setActiveIdx] = React.useState(0);
-  const items = tab === "afia" ? actusAfia : actusMeaux;
-  const featured = items[activeIdx];
+  const items = (tab === "afia" ? actusAfia : actusMeaux).slice(0, 4);
+  const featured = items[activeIdx] ?? items[0];
 
   function selectTab(next: "afia" | "meaux") {
     setTab(next);
     setActiveIdx(0);
   }
+
+  if (!featured) return null;
 
   return (
     <Section className="pt-12 md:pt-16">

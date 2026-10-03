@@ -1,0 +1,205 @@
+{
+  "_notice": "Fichier de données des actualités du site. Voir CONSIGNES_ACTUALITES.md avant toute modification.",
+  "afia": [
+    {
+      "id": "aide-aux-devoirs-afia-reussite",
+      "category": "Programme",
+      "title": "AFIA Réussite : aide aux devoirs, tous les mardis et vendredis",
+      "date": "Rentrée 2026-2027",
+      "excerpt": "Le soutien scolaire gratuit a lieu tous les mardis et vendredis de 16h30 à 18h00, pour les élèves du primaire et du collège. Les places sont limitées à 10 élèves. Les inscriptions se feront au local de l'association, les dates seront annoncées prochainement.",
+      "image": "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=900&q=80",
+      "statut": "en_cours",
+      "publie": true,
+      "source": "indications de Bakar, 3 oct. 2026",
+      "image_provisoire": true
+    },
+    {
+      "id": "forum-insertion-jeune-2026",
+      "category": "Événement",
+      "title": "Forum Insertion Jeune : huit structures réunies au Square de la Brie",
+      "date": "16 septembre 2026",
+      "excerpt": "Le 16 septembre, le Square de la Brie a accueilli un forum gratuit et ouvert à tous, dédié à l'insertion des jeunes de 16 à 25 ans. Huit structures étaient présentes pour informer et orienter : la Mission Locale Nord-Est, l'EPIDE, le CIO, l'École de la 2e Chance de Seine-et-Marne, l'ADSEA 77, la Maison des Parents de Meaux, le Collectif Meldois et les structures jeunesse de la ville. Un événement organisé avec la Ville de Meaux.",
+      "image": "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=900&q=80",
+      "statut": "termine",
+      "publie": true,
+      "source": "indications de Bakar 3 oct. 2026 ; Dossier_Projet_Forum_Insertion_Jeune.docx",
+      "image_provisoire": true
+    },
+    {
+      "id": "journee-des-familles-bessieres-2026",
+      "category": "Événement",
+      "title": "Journée des Familles d'Ici et d'Ailleurs : 250 à 300 personnes à l'Espace Bessières",
+      "date": "21 août 2026",
+      "excerpt": "Le 21 août, l'Espace Bessières a réuni entre 250 et 300 personnes pour une après-midi gratuite : stands de maquillage, jeux d'extérieur pour les enfants, scène ouverte « Incroyable Talent » où des enfants ont chanté, et une vingtaine de lots de tombola, dont des fournitures scolaires et des lots de coiffure pour la rentrée. Merci à nos sponsors, dont le magasin E.Leclerc de Mareuil-lès-Meaux, à la Politique de la Ville et à 3F Immobilier pour leur soutien financier, ainsi qu'à la sous-préfète et aux élus venus nous encourager.",
+      "image": "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=900&q=80",
+      "statut": "termine",
+      "publie": true,
+      "source": "indications de Bakar, 3 oct. 2026",
+      "image_provisoire": true
+    },
+    {
+      "id": "sortie-paintball-citoyennete-par-le-sport-2026",
+      "category": "Sortie",
+      "title": "Sortie Paintball : citoyenneté par le sport",
+      "date": "30 avril 2026",
+      "excerpt": "Dix-huit jeunes du quartier ont participé à une sortie paintball suivie d'un barbecue. Cette action du pôle sociétal a permis d'échanger autour du respect des règles, des autres et du bien-être collectif.",
+      "image": "https://i.imgur.com/bTwviXR.jpeg",
+      "statut": "termine",
+      "publie": true,
+      "source": "contenu validé de la page Pôle sociétal, sortie Paintball du 30 avril 2026"
+    },
+    {
+      "id": "nigloland-2026",
+      "category": "Sortie",
+      "title": "Nigloland : 63 participants pour une première au parc",
+      "date": "18 août 2026",
+      "excerpt": "Le 18 août, 63 personnes sont parties à Nigloland, à Dolancourt, pour clôturer l'été. C'était la première fois qu'AFIA se rendait dans ce parc, et il y a de quoi passer une très belle journée en famille.",
+      "image": "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=900&q=80",
+      "statut": "termine",
+      "publie": true,
+      "source": "indications de Bakar, 3 oct. 2026",
+      "image_provisoire": true
+    },
+    {
+      "id": "fort-mahon-2026",
+      "category": "Sortie",
+      "title": "Plage de Fort-Mahon : 60 participants en plein soleil",
+      "date": "10 août 2026",
+      "excerpt": "Le 10 août, 60 personnes sont parties en car pour la plage de Fort-Mahon. Arrivés vers midi, les participants ont profité de la plage sous un grand soleil, et tout le monde a adoré la journée.",
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80",
+      "statut": "termine",
+      "publie": true,
+      "source": "indications de Bakar, 3 oct. 2026",
+      "image_provisoire": true
+    },
+    {
+      "id": "aventure-land-bilan-2026",
+      "category": "Sortie",
+      "title": "Aventure Land : environ 54 participants",
+      "date": "16 juillet 2026",
+      "excerpt": "Le 16 juillet, AFIA a emmené environ 54 participants au parc Aventure Land de Magny-en-Vexin, dans le cadre de Quartier d'été : accrobranche, jeux, structures gonflables et toboggans. Merci aux familles, aux bénévoles et à la Ville de Meaux pour son soutien.",
+      "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=900&q=80",
+      "statut": "termine",
+      "publie": true,
+      "source": "TEXTE_POST_AVENTURELAND.md ; SUIVI_QUARTIER_ETE_2026.md",
+      "image_provisoire": true
+    },
+    {
+      "id": "repas-solidaire-au-colisee-230-participants",
+      "category": "Événement",
+      "title": "Repas solidaire au Colisée : 230 participants",
+      "date": "Mars 2026",
+      "excerpt": "Retour sur un moment fort de l'année : jeunes et parents réunis autour d'un grand repas citoyen au Colisée de Meaux.",
+      "image": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=80",
+      "statut": "termine",
+      "publie": true,
+      "source": "MEMOIRE_AFIA.md (repas solidaire du 02/03/2026, 230 participants)"
+    },
+    {
+      "id": "aventure-land-sortie-parc-le-16-juillet",
+      "category": "Sortie",
+      "title": "Aventure Land : sortie parc le 16 juillet",
+      "date": "Juillet 2026",
+      "excerpt": "Inscriptions ouvertes pour la grande sortie familiale au parc d'attractions dans les arbres. 60 places disponibles.",
+      "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=900&q=80",
+      "statut": "a_verifier",
+      "publie": false,
+      "source": "contenu initial du site (exemple, à vérifier)",
+      "note_retrait": "3 oct. 2026 : ancien texte Aventure Land (inscriptions ouvertes), remplacé par un bilan à venir"
+    },
+    {
+      "id": "tournoi-de-foot-intergenerationnel-en-aout",
+      "category": "À venir",
+      "title": "Tournoi de foot intergénérationnel en août",
+      "date": "Août 2026",
+      "excerpt": "Un tournoi à 5 pour réunir jeunes et adultes du quartier autour du sport et de la convivialité.",
+      "image": "https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=900&q=80",
+      "statut": "a_verifier",
+      "publie": false,
+      "source": "contenu initial du site (exemple, à vérifier)",
+      "note_retrait": "3 oct. 2026 : aucune trace, retiré sur demande de Bakar"
+    },
+    {
+      "id": "plage-de-dieppe-29-juillet",
+      "category": "Sortie",
+      "title": "Plage de Dieppe — 29 juillet",
+      "date": "Juillet 2026",
+      "excerpt": "Une journée à la mer en famille, départ en car depuis le quartier.",
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80",
+      "statut": "a_verifier",
+      "publie": false,
+      "source": "contenu initial du site (exemple, à vérifier)",
+      "note_retrait": "3 oct. 2026 : sortie annulée"
+    },
+    {
+      "id": "nigloland-18-aout",
+      "category": "Sortie",
+      "title": "Nigloland — 18 août",
+      "date": "Août 2026",
+      "excerpt": "Clôture de l'été avec une sortie au grand parc d'attractions de Dolancourt.",
+      "image": "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=900&q=80",
+      "statut": "a_verifier",
+      "publie": false,
+      "source": "contenu initial du site (exemple, à vérifier)",
+      "note_retrait": "3 oct. 2026 : remplacé par une version mise à jour"
+    },
+    {
+      "id": "aide-aux-devoirs-deux-seances-par-semaine",
+      "category": "Programme",
+      "title": "Aide aux devoirs : deux séances par semaine",
+      "date": "Toute l'année",
+      "excerpt": "Le programme d'accompagnement scolaire continue pour les élèves du primaire et du collège du quartier.",
+      "image": "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=900&q=80",
+      "statut": "en_cours",
+      "publie": false,
+      "source": "contenu initial du site (exemple, à vérifier)",
+      "note_retrait": "3 oct. 2026 : remplacé par une version mise à jour"
+    }
+  ],
+  "meaux": [
+    {
+      "id": "quartier-d-ete-2026-programmation-municipale",
+      "category": "Ville",
+      "title": "Quartier d'été 2026 : programmation municipale",
+      "date": "Juillet – Août",
+      "excerpt": "La Ville de Meaux lance la saison des animations estivales dans les quartiers.",
+      "image": "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=900&q=80",
+      "statut": "a_verifier",
+      "publie": true,
+      "source": "contenu initial du site (exemple, à vérifier)"
+    },
+    {
+      "id": "aides-au-logement-permanences-ccas",
+      "category": "Dispositif",
+      "title": "Aides au logement : permanences CCAS",
+      "date": "Permanent",
+      "excerpt": "Le Centre Communal d'Action Sociale tient des permanences pour accompagner les habitants dans leurs démarches.",
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80",
+      "statut": "permanent",
+      "publie": true,
+      "source": "contenu initial du site (exemple, à vérifier)"
+    },
+    {
+      "id": "colisee-de-meaux-saison-2026",
+      "category": "Culture",
+      "title": "Colisée de Meaux : saison 2026",
+      "date": "Septembre 2026",
+      "excerpt": "Découvrez la nouvelle saison culturelle du Colisée, partenaire régulier de nos événements.",
+      "image": "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=900&q=80",
+      "statut": "a_verifier",
+      "publie": true,
+      "source": "contenu initial du site (exemple, à vérifier)"
+    },
+    {
+      "id": "prevention-rixes-dispositif-prefecture",
+      "category": "Jeunesse",
+      "title": "Prévention rixes : dispositif préfecture",
+      "date": "2026",
+      "excerpt": "La Préfecture de Seine-et-Marne soutient les actions de prévention menées par les associations locales.",
+      "image": "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=900&q=80",
+      "statut": "a_verifier",
+      "publie": true,
+      "source": "contenu initial du site (exemple, à vérifier)"
+    }
+  ]
+}
