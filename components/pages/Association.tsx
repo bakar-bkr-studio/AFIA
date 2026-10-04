@@ -2,131 +2,89 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { partners } from "@/lib/partenaires";
+import { ADHESIONS_OUVERTES, LIBELLE_BOUTON_ADHESION, PROCHAINE_SESSION } from "@/lib/adhesion";
 import { Section } from "@/components/ui/Section";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import {
+  ArrowDown,
   ArrowRight,
+  Buildings,
   CalendarCheck,
-  CheckCircle,
-  Coins,
-  Compass,
-  Confetti,
   EnvelopeSimple,
+  GameController,
   HandHeart,
   Handshake,
   HouseLine,
-  MegaphoneSimple,
+  IdentificationCard,
+  Lightbulb,
   ShieldCheck,
+  Sparkle,
   UsersThree,
 } from "@phosphor-icons/react";
+import type { Icon } from "@phosphor-icons/react";
+import type { ReactNode } from "react";
+
+/* ── Données (source : MEMOIRE_AFIA.md) ── */
 
 const timeline = [
   {
     year: "2010",
-    title: "Création à Beauval par Fouzia BELRAAM",
-    desc: "L'association naît pour répondre à un besoin concret des familles : se rencontrer, partager et recréer une vie locale dynamique.",
+    title: "Création à Beauval",
+    desc: "Fouzia BELRAAM constate le manque d’animations et de lien entre les habitants. Elle crée l’association pour offrir aux familles des sorties, des fêtes et des moments de partage.",
   },
   {
     year: "2022",
     title: "Structuration en pôles",
-    desc: "L'AFIA structure ses activités autour du pôle ludique et du pôle sociétal. Un pôle défense des locataires est aussi créé temporairement, actif une année.",
+    desc: "AFIA organise ses activités autour d’un pôle ludique et d’un pôle social. Un pôle de défense des locataires est aussi lancé, actif pendant une année.",
   },
   {
-    year: "2026",
-    title: "Nomination d'Aboubakar à la présidence",
-    desc: "Sa nomination vise à dynamiser l'activité de l'association et à y apporter son expertise au service du quartier.",
+    year: "Janvier 2026",
+    title: "Un nouveau Bureau",
+    desc: "L’assemblée générale élit un nouveau Bureau. Aboubakar en devient le président, avec l’ambition de dynamiser les actions au service du quartier.",
   },
   {
-    year: "Aujourd'hui",
-    title: "Une organisation en trois pôles",
-    desc: "L'association réunit trois pôles complémentaires : le pôle ludique, le pôle sociétal et le pôle jeunesse. Ce dernier rassemble une cinquantaine de jeunes bénévoles à Meaux.",
+    year: "Aujourd’hui",
+    title: "Trois pôles, 30 familles",
+    desc: "Pôle ludique, pôle sociétal et pôle jeunesse : AFIA rassemble une trentaine de familles adhérentes, soit environ 110 adhérents.",
+    current: true,
   },
 ];
 
+const mission: { icon: Icon; title: string; desc: string }[] = [
+  { icon: UsersThree, title: "Rassembler les familles", desc: "Un espace d’accueil, de discussion et d’échanges au cœur du quartier." },
+  { icon: Sparkle, title: "Créer du lien", desc: "Des animations variées tout au long de l’année pour que les habitants se rencontrent." },
+  { icon: Handshake, title: "Faire dialoguer", desc: "Favoriser les échanges entre les générations et entre les cultures." },
+  { icon: HouseLine, title: "Améliorer la vie du quartier", desc: "Agir pour la qualité de vie des familles et le dynamisme local." },
+  { icon: Lightbulb, title: "Porter les projets des adhérents", desc: "Aider les habitants à concrétiser leurs idées sur le terrain." },
+  { icon: ShieldCheck, title: "Défendre les locataires", desc: "Représenter leurs intérêts auprès du bailleur, de la mairie et des autres interlocuteurs." },
+];
+
+const valeurs = ["Lien social", "Solidarité", "Citoyenneté", "Proximité", "Convivialité"];
+
 const poles = [
   {
-    icon: Confetti,
+    icon: GameController,
     name: "Pôle ludique",
-    desc: "Conçoit et organise les activités récréatives et conviviales pour créer du lien entre les habitants.",
-    items: [
-      "Activités pour les enfants",
-      "Animations de quartier",
-      "Sorties estivales",
-      "Événements festifs et de lien social",
-    ],
+    desc: "Sorties familles, fêtes de quartier, jeux et ateliers créatifs.",
+    href: "/pole-ludique",
+    image: "https://i.imgur.com/SqbljKJ.jpeg",
+    accent: true,
   },
   {
     icon: HandHeart,
     name: "Pôle sociétal",
-    desc: "Agit sur les problématiques sociales du quartier, dans une logique d'écoute, de prévention et d'accompagnement.",
-    items: [
-      "Accès à l'information",
-      "Lutte contre l'exclusion sociale",
-      "Prévention des rixes",
-      "Lutte contre les difficultés scolaires",
-    ],
+    desc: "Aide aux devoirs, forums d’information et prévention des rixes.",
+    href: "/pole-societal",
+    image: "https://i.imgur.com/IHB9NJd.jpeg",
   },
   {
     icon: UsersThree,
     name: "Pôle jeunesse",
-    desc: "Structure interne réunissant une cinquantaine de jeunes bénévoles de Meaux qui mènent leurs propres projets citoyens.",
-    items: [
-      "Maraudes solidaires",
-      "Sorties culturelles",
-      "Actions solidaires",
-      "Animations de quartier",
-    ],
-  },
-];
-
-const mission = [
-  {
-    icon: UsersThree,
-    title: "Créer du lien entre les familles",
-    desc: "Offrir des espaces d'accueil, de dialogue et de rencontres au cœur du quartier.",
-  },
-  {
-    icon: HouseLine,
-    title: "Améliorer la qualité de vie locale",
-    desc: "Déployer des actions utiles au quotidien pour renforcer le cadre de vie des habitants.",
-  },
-  {
-    icon: Handshake,
-    title: "Favoriser les échanges intergénérationnels",
-    desc: "Faire dialoguer les générations et les cultures pour construire un vivre-ensemble solide.",
-  },
-  {
-    icon: MegaphoneSimple,
-    title: "Accompagner les projets des habitants",
-    desc: "Soutenir les idées portées par les adhérents et faciliter leur mise en œuvre sur le terrain.",
-  },
-];
-
-const memberPower = [
-  {
-    icon: CalendarCheck,
-    title: "Choisir les activités",
-    desc: "Sorties, ateliers et événements sont proposés puis retenus par les adhérents.",
-  },
-  {
-    icon: Coins,
-    title: "Fixer les tarifs",
-    desc: "Cotisation et participations aux sorties sont décidées collectivement.",
-  },
-  {
-    icon: Compass,
-    title: "Orienter les missions",
-    desc: "Les grandes priorités de l'association sont définies ensemble.",
-  },
-];
-
-const instances = [
-  {
-    icon: UsersThree,
-    title: "Assemblée générale",
-    desc: "Instance souveraine : chaque adhérent y dispose d'une voix pour voter les décisions et le budget.",
+    desc: "Une cinquantaine de jeunes bénévoles de Meaux qui portent leurs propres projets.",
+    href: "/pole-jeunesse",
+    image: "https://i.imgur.com/bTwviXR.jpeg",
   },
 ];
 
@@ -136,125 +94,210 @@ const bureau = [
   { role: "Secrétaire", person: "Christine" },
 ];
 
-const partners = [
+// Partenaires par catégorie. Les logos viennent de lib/partenaires.ts quand ils existent.
+const logoByName = Object.fromEntries(partners.map((p) => [p.name, p.logo]));
+const partnerGroups: { title: string; items: { name: string; logoKey?: string }[] }[] = [
   {
-    name: "Mairie de Meaux",
-    logo: "https://upload.wikimedia.org/wikipedia/fr/thumb/b/bf/Logo_Meaux.svg/1920px-Logo_Meaux.svg.png?_=20180201204632",
-    category: "Institution",
+    title: "Collectivités et institutions",
+    items: [
+      { name: "Ville de Meaux", logoKey: "Mairie de Meaux" },
+      { name: "Préfet de Seine-et-Marne", logoKey: "Préfecture de Seine-et-Marne" },
+      { name: "Pays de Meaux (communauté d’agglomération)" },
+    ],
   },
   {
-    name: "Préfecture de Seine-et-Marne",
-    logo: "https://upload.wikimedia.org/wikipedia/fr/thumb/f/f8/Pr%C3%A9fet_de_Seine-et-Marne.svg/500px-Pr%C3%A9fet_de_Seine-et-Marne.svg.png?_=20210421150709",
-    category: "Institution",
+    title: "Bailleurs sociaux",
+    items: [
+      { name: "Groupe 3F", logoKey: "Groupe 3F" },
+      { name: "Pays de Meaux Habitat", logoKey: "Pays de Meaux Habitat" },
+    ],
   },
   {
-    name: "Groupe 3F",
-    logo: "https://www.groupe3f.fr/themes/custom/threef_theme/images/logo.svg",
-    category: "Bailleur social",
+    title: "Insertion, emploi et orientation",
+    items: [
+      { name: "Mission Locale de Meaux", logoKey: "Mission locale" },
+      { name: "CIO", logoKey: "CIO de Créteil" },
+      { name: "École de la 2e Chance 77", logoKey: "E2C 77" },
+      { name: "Maison de l’Emploi" },
+      { name: "Bureau Information Jeunesse (BIJ)" },
+    ],
   },
   {
-    name: "Pays de Meaux Habitat",
-    logo: "https://www.pays-de-meaux-habitat.fr/wp-content/uploads/2024/01/logo-CMJN-pays-2024.png",
-    category: "Bailleur social",
-  },
-  {
-    name: "Mission locale",
-    logo: "/images/partners/mission-locale.png",
-    category: "Insertion professionnelle",
-  },
-  {
-    name: "CIO de Créteil",
-    logo: "/images/partners/cio-creteil.webp",
-    category: "Orientation",
-  },
-  {
-    name: "E2C 77",
-    logo: "/images/partners/e2c-77.png",
-    category: "Formation et insertion",
+    title: "Associations partenaires",
+    items: [
+      { name: "Transmission" },
+      { name: "OneGoal Academy" },
+      { name: "Le Collectif Meldois" },
+      { name: "BFC" },
+      { name: "Handi Zen" },
+      { name: "Dynamic Jeunes" },
+    ],
   },
 ];
 
+const identite: { label: string; value: string }[] = [
+  { label: "Nom", value: "Association Familles d’Ici et d’Ailleurs (AFIA)" },
+  { label: "Statut", value: "Association loi 1901, déclarée à la sous-préfecture de Meaux" },
+  { label: "Création", value: "5 janvier 2010" },
+  { label: "Siège", value: "Appartement 25, 4 Square de la Brie, 77100 Meaux" },
+  { label: "N° RNA", value: "W771002607" },
+  { label: "N° SIREN", value: "531 632 347" },
+  { label: "Secteur", value: "Membre de l’Économie sociale et solidaire (ESS)" },
+];
 
+/* ── Petits composants ── */
+
+function SectionHeading({ eyebrow, title, intro }: { eyebrow: string; title: ReactNode; intro?: string }) {
+  return (
+    <FadeIn className="max-w-3xl mb-10 md:mb-12">
+      <span className="eyebrow text-primary-700 mb-3">{eyebrow}</span>
+      <h2 className="font-heading font-black text-[clamp(28px,3.5vw,44px)] tracking-[-0.025em] text-primary-950 leading-[1.05]">
+        {title}
+      </h2>
+      {intro && (
+        <p className="mt-5 text-base md:text-lg leading-relaxed text-text-secondary max-w-[60ch]">{intro}</p>
+      )}
+    </FadeIn>
+  );
+}
+
+function GovLevel({
+  step,
+  icon: IconCmp,
+  title,
+  children,
+  dark,
+}: {
+  step: string;
+  icon: Icon;
+  title: string;
+  children: ReactNode;
+  dark?: boolean;
+}) {
+  return (
+    <div
+      className={`relative rounded-3xl p-6 md:p-8 ${
+        dark ? "grain overflow-hidden bg-primary-950 text-white" : "border border-border-subtle bg-surface-elevated"
+      }`}
+    >
+      {dark && <div className="absolute -top-20 -right-20 h-56 w-56 rounded-full bg-primary-700/40 blur-3xl pointer-events-none" />}
+      <div className="relative">
+        <div className="flex items-center gap-3 mb-4">
+          <div className={`h-11 w-11 rounded-xl flex items-center justify-center ${dark ? "bg-white/10" : "bg-primary-50"}`}>
+            <IconCmp size={22} weight="duotone" className={dark ? "text-accent-300" : "text-primary-700"} />
+          </div>
+          <div>
+            <p className={`text-[10px] uppercase tracking-[0.14em] font-semibold ${dark ? "text-accent-300" : "text-primary-700"}`}>
+              {step}
+            </p>
+            <h3 className={`font-heading font-bold text-xl ${dark ? "text-white" : "text-text-primary"}`}>{title}</h3>
+          </div>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function GovArrow() {
+  return (
+    <div className="flex justify-center py-2" aria-hidden="true">
+      <ArrowDown size={22} weight="bold" className="text-primary-300" />
+    </div>
+  );
+}
+
+/* ── Composant ── */
 
 export function Association() {
   return (
     <>
-      {/* Hero */}
-      <Section className="pt-32 md:pt-40 pb-12 md:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <FadeIn>
-            <Badge variant="primary" className="mb-6">
-              Qui sommes-nous
-            </Badge>
-            <h1 className="font-heading text-4xl md:text-6xl font-bold tracking-tighter text-text-primary max-w-2xl leading-[1.03]">
-              Une association engagée au cœur de Meaux
-            </h1>
-            <p className="mt-6 text-base md:text-lg leading-relaxed text-text-secondary max-w-[58ch]">
-              Depuis 2010, AFIA agit à Beauval avec les familles du quartier.
-              Notre approche est simple : être présents sur le terrain, écouter
-              les besoins réels et construire des actions utiles, accessibles et
-              concrètes.
-            </p>
-            <div className="mt-8 grid grid-cols-2 gap-3 max-w-md">
-              <div className="rounded-xl border border-border-subtle bg-surface-elevated p-4">
-                <p className="font-heading text-2xl font-bold tracking-tight text-text-primary">
-                  2010
-                </p>
-                <p className="text-xs text-text-secondary mt-1">Création d&apos;AFIA</p>
-              </div>
-              <div className="rounded-xl border border-border-subtle bg-surface-elevated p-4">
-                <p className="font-heading text-2xl font-bold tracking-tight text-text-primary">
-                  Beauval
-                </p>
-                <p className="text-xs text-text-secondary mt-1">Ancrage local à Meaux</p>
-              </div>
-            </div>
-          </FadeIn>
-          <FadeIn delay={0.1}>
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-surface-muted">
-              <Image
-                src="https://www.tourisme-seine-et-marne.fr/wp-content/uploads/apidae/2018705_fr.jpg"
-                alt="La ville de Meaux, en Seine-et-Marne"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-950/45 via-primary-900/10 to-transparent" />
-              <div className="absolute left-4 right-4 bottom-4 md:left-6 md:right-6 md:bottom-6 rounded-2xl bg-white/85 backdrop-blur p-4">
-                <p className="text-xs uppercase tracking-wider text-primary font-semibold">
-                  Slogan AFIA
-                </p>
-                <p className="text-sm text-text-primary mt-1">
-                  Créer du lien, partager, construire ensemble.
-                </p>
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-      </Section>
+      {/* ════ Hero ════ */}
+      <section className="relative pt-14 md:pt-20 pb-14 md:pb-20 overflow-hidden bg-paper-warm">
+        <div className="grain-light absolute inset-0 pointer-events-none" />
+        <div className="relative mx-auto max-w-[1400px] px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            <FadeIn className="lg:col-span-6">
+              <span className="eyebrow text-primary-700 mb-6">L’association</span>
+              <h1 className="font-heading font-black text-[clamp(40px,5.6vw,76px)] leading-[0.98] tracking-[-0.03em] text-primary-950 mt-4 text-balance">
+                Née au cœur<br />
+                <span className="text-primary">de Beauval.</span>
+              </h1>
+              <p className="mt-8 text-lg md:text-xl leading-relaxed text-text-secondary max-w-[52ch]">
+                Depuis 2010, l’Association Familles d’Ici et d’Ailleurs rassemble
+                les familles du quartier de Beauval, à Meaux. Notre approche :
+                être présents sur le terrain, écouter les besoins réels et
+                construire des actions utiles.
+              </p>
+              <ul className="mt-8 flex flex-wrap gap-3">
+                {["Créée en 2010", "Association loi 1901", "Économie sociale et solidaire"].map((f) => (
+                  <li
+                    key={f}
+                    className="rounded-full border border-primary/15 bg-surface-elevated px-4 py-2 text-sm font-semibold text-primary-800"
+                  >
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </FadeIn>
 
-      {/* Mission */}
-      <Section className="bg-primary-950">
-        <FadeIn className="mb-14 text-center">
-          <span className="text-xs font-medium tracking-widest uppercase text-primary-300">
-            Notre mission
-          </span>
-          <h2 className="mt-3 font-heading text-3xl md:text-4xl font-bold tracking-tighter text-white max-w-xl mx-auto">
-            Transformer les besoins du quartier en actions utiles
-          </h2>
-        </FadeIn>
-
-        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {mission.map((item) => (
-            <StaggerItem key={item.title}>
-              <div className="group flex flex-col items-center text-center rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary-400/40 transition-all duration-300 p-7">
-                <div className="h-14 w-14 rounded-full bg-primary/20 flex items-center justify-center mb-5 group-hover:bg-primary/30 transition-colors duration-300">
-                  <item.icon size={26} weight="duotone" className="text-primary-200" />
+            <FadeIn delay={0.15} className="lg:col-span-6">
+              <div className="relative">
+                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-surface-muted shadow-diffuse">
+                  <Image
+                    src="https://i.imgur.com/yzcueAS.jpeg"
+                    alt="Membres et partenaires d'AFIA lors du repas solidaire au Colisée de Meaux"
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-950/55 via-primary-950/10 to-transparent" />
                 </div>
-                <h3 className="font-heading text-base md:text-lg font-semibold tracking-tight text-white mb-2">
+                <div className="absolute -bottom-6 left-4 sm:-left-6 max-w-[300px] rounded-2xl bg-accent text-white px-6 py-5 shadow-diffuse">
+                  <p className="text-[11px] uppercase tracking-[0.14em] font-semibold text-white/85">Notre devise</p>
+                  <p className="mt-1.5 font-heading font-black text-lg leading-snug">
+                    Créer du lien, partager, construire ensemble.
+                  </p>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* ════ Histoire ════ */}
+      <Section className="py-16 md:py-24">
+        <SectionHeading
+          eyebrow="Notre histoire"
+          title={
+            <>
+              Seize ans <span className="text-primary">au service du quartier.</span>
+            </>
+          }
+        />
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {timeline.map((item) => (
+            <StaggerItem key={item.year}>
+              <div
+                className={`relative h-full rounded-3xl p-6 md:p-7 ${
+                  item.current
+                    ? "bg-primary-950 text-white"
+                    : "border border-border-subtle bg-surface-elevated"
+                }`}
+              >
+                <p
+                  className={`font-heading font-black text-[28px] leading-none tracking-[-0.03em] ${
+                    item.current ? "text-accent-300" : "text-primary"
+                  }`}
+                >
+                  {item.year}
+                </p>
+                <div className={`my-5 h-px ${item.current ? "bg-white/15" : "bg-border-subtle"}`} />
+                <h3 className={`font-heading font-bold text-lg ${item.current ? "text-white" : "text-text-primary"}`}>
                   {item.title}
                 </h3>
-                <p className="text-xs md:text-sm text-primary-200 leading-relaxed">
+                <p className={`mt-2 text-sm leading-relaxed ${item.current ? "text-primary-100" : "text-text-secondary"}`}>
                   {item.desc}
                 </p>
               </div>
@@ -263,312 +306,271 @@ export function Association() {
         </StaggerContainer>
       </Section>
 
-      {/* Histoire */}
-      <Section className="bg-surface-elevated">
-        <FadeIn className="max-w-3xl mb-14">
-          <span className="text-xs font-medium tracking-widest uppercase text-primary">
-            Notre histoire
-          </span>
-          <h2 className="mt-3 font-heading text-3xl md:text-4xl font-bold tracking-tighter text-text-primary">
-            Une histoire née du terrain
-          </h2>
+      {/* ════ Ce qui nous guide ════ */}
+      <Section className="bg-surface-muted py-16 md:py-24">
+        <SectionHeading
+          eyebrow="Ce qui nous guide"
+          title={
+            <>
+              Notre mission <span className="text-primary">et nos valeurs.</span>
+            </>
+          }
+        />
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          {mission.map((m) => (
+            <StaggerItem key={m.title}>
+              <div className="h-full rounded-3xl border border-border-subtle bg-surface-elevated p-6 md:p-7">
+                <div className="h-12 w-12 rounded-2xl bg-primary-50 flex items-center justify-center mb-5">
+                  <m.icon size={24} weight="duotone" className="text-primary-700" />
+                </div>
+                <h3 className="font-heading font-bold text-lg text-text-primary">{m.title}</h3>
+                <p className="mt-2 text-sm text-text-secondary leading-relaxed">{m.desc}</p>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+        <FadeIn delay={0.1} className="mt-8 flex flex-wrap items-center gap-3">
+          <span className="text-sm font-semibold text-text-primary mr-1">Nos valeurs :</span>
+          {valeurs.map((v) => (
+            <span
+              key={v}
+              className="rounded-full bg-primary-950 px-4 py-2 text-sm font-semibold text-white"
+            >
+              {v}
+            </span>
+          ))}
         </FadeIn>
+      </Section>
 
-        <div className="relative border-l border-primary-200 ml-3 md:ml-5 pl-6 md:pl-10 space-y-8">
-          {timeline.map((item, i) => (
-            <FadeIn key={item.year} delay={i * 0.05}>
-              <div className="relative rounded-2xl border border-border-subtle bg-surface p-6 md:p-7">
-                <span className="absolute -left-[39px] md:-left-[55px] top-7 h-3 w-3 rounded-full bg-primary" />
-                <p className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">
-                  {item.year}
-                </p>
-                <h3 className="font-heading text-xl font-semibold tracking-tight text-text-primary mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-sm md:text-base leading-relaxed text-text-secondary max-w-[65ch]">
-                  {item.desc}
-                </p>
+      {/* ════ Nos pôles ════ */}
+      <Section className="py-16 md:py-24">
+        <SectionHeading
+          eyebrow="Notre organisation"
+          title={
+            <>
+              Trois pôles <span className="text-primary">complémentaires.</span>
+            </>
+          }
+          intro="Chaque pôle a son propre champ d’action et collabore avec les autres quand les projets le demandent."
+        />
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+          {poles.map((p) => (
+            <StaggerItem key={p.name}>
+              <Link
+                href={p.href}
+                className="group h-full flex flex-col rounded-3xl overflow-hidden border border-border-subtle bg-surface-elevated hover:-translate-y-1 hover:shadow-diffuse transition-all duration-300"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden bg-surface-muted">
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    fill
+                    className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                  />
+                </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${p.accent ? "bg-accent-100" : "bg-primary-50"}`}>
+                      <p.icon size={20} weight="duotone" className={p.accent ? "text-accent-700" : "text-primary-700"} />
+                    </div>
+                    <h3 className="font-heading font-bold text-xl text-text-primary">{p.name}</h3>
+                  </div>
+                  <p className="text-sm text-text-secondary leading-relaxed flex-1">{p.desc}</p>
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                    Découvrir le pôle
+                    <ArrowRight size={14} weight="bold" className="transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </div>
+              </Link>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+      </Section>
+
+      {/* ════ Gouvernance ════ */}
+      <Section className="bg-paper-warm py-16 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          <FadeIn className="lg:col-span-5">
+            <span className="eyebrow text-primary-700 mb-3">Gouvernance</span>
+            <h2 className="font-heading font-black text-[clamp(28px,3.5vw,44px)] tracking-[-0.025em] text-primary-950 leading-[1.05]">
+              Comment fonctionne <span className="text-primary">AFIA ?</span>
+            </h2>
+            <p className="mt-5 text-base md:text-lg leading-relaxed text-text-secondary">
+              Les adhérents sont au cœur des décisions : ce sont eux qui
+              proposent et choisissent les activités. Le Bureau valide et
+              assure la gestion courante, puis les pôles et les bénévoles
+              passent à l’action.
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={0.1} className="lg:col-span-7">
+            <GovLevel step="1 · Proposer et choisir" icon={UsersThree} title="Les adhérents">
+              <ul className="space-y-2 text-sm text-text-secondary">
+                <li className="flex items-start gap-2">
+                  <CalendarCheck size={18} weight="duotone" className="text-primary-700 shrink-0 mt-0.5" />
+                  <span>
+                    <span className="font-semibold text-text-primary">En réunion :</span> ils proposent
+                    et choisissent les sorties et activités, et proposent les tarifs.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Buildings size={18} weight="duotone" className="text-primary-700 shrink-0 mt-0.5" />
+                  <span>
+                    <span className="font-semibold text-text-primary">En assemblée générale :</span> ils
+                    valident les grandes orientations, approuvent les bilans et élisent le Bureau.
+                  </span>
+                </li>
+              </ul>
+            </GovLevel>
+            <GovArrow />
+            <GovLevel step="2 · Valider et gérer" icon={ShieldCheck} title="Le Bureau" dark>
+              <p className="text-sm text-primary-100 leading-relaxed">
+                Il valide les propositions des adhérents, assure la gestion
+                courante et le suivi financier.
+              </p>
+              <ul className="mt-5 grid grid-cols-3 gap-3">
+                {bureau.map((m) => (
+                  <li key={m.role} className="rounded-2xl bg-white/10 border border-white/15 p-4 text-center">
+                    <span className="mx-auto h-11 w-11 rounded-xl bg-white/15 flex items-center justify-center font-heading font-black text-lg text-accent-300">
+                      {m.person.charAt(0)}
+                    </span>
+                    <p className="mt-3 font-heading font-bold text-white">{m.person}</p>
+                    <p className="text-xs text-primary-200">{m.role}</p>
+                  </li>
+                ))}
+              </ul>
+            </GovLevel>
+            <GovArrow />
+            <GovLevel step="3 · Agir" icon={HandHeart} title="Les pôles et les bénévoles">
+              <p className="text-sm text-text-secondary leading-relaxed">
+                Ils organisent et animent les actions sur le terrain : sorties,
+                aide aux devoirs, fêtes, forums et projets des jeunes.
+              </p>
+            </GovLevel>
+          </FadeIn>
+        </div>
+      </Section>
+
+      {/* ════ Partenaires ════ */}
+      <Section className="py-16 md:py-24">
+        <SectionHeading
+          eyebrow="Partenaires"
+          title={
+            <>
+              Ils agissent <span className="text-primary">à nos côtés.</span>
+            </>
+          }
+          intro="Collectivités, bailleurs, structures d’insertion et associations : nos actions se construisent avec un réseau de partenaires engagés."
+        />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
+          {partnerGroups.map((g, gi) => (
+            <FadeIn key={g.title} delay={gi * 0.05}>
+              <div className="h-full rounded-3xl border border-border-subtle bg-surface-elevated p-6 md:p-8">
+                <p className="eyebrow text-primary-700 mb-5">{g.title}</p>
+                <ul className="flex flex-wrap gap-3">
+                  {g.items.map((it) => {
+                    const logo = it.logoKey ? logoByName[it.logoKey] : undefined;
+                    return logo ? (
+                      <li
+                        key={it.name}
+                        className="flex items-center gap-3 rounded-2xl border border-border-subtle bg-white pl-2 pr-4 py-2"
+                      >
+                        <span className="relative h-10 w-16 shrink-0">
+                          <Image src={logo} alt="" fill className="object-contain" sizes="64px" />
+                        </span>
+                        <span className="text-sm font-semibold text-text-primary">{it.name}</span>
+                      </li>
+                    ) : (
+                      <li
+                        key={it.name}
+                        className="flex items-center gap-2 rounded-2xl border border-border-subtle bg-surface-muted px-4 py-3 text-sm font-semibold text-text-primary"
+                      >
+                        <Handshake size={18} weight="duotone" className="text-primary-700" />
+                        {it.name}
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
             </FadeIn>
           ))}
         </div>
       </Section>
 
-      {/* Pôles */}
-      <Section>
-        <FadeIn className="max-w-3xl mb-14">
-          <span className="text-xs font-medium tracking-widest uppercase text-primary">
-            Notre organisation
-          </span>
-          <h2 className="mt-3 font-heading text-3xl md:text-4xl font-bold tracking-tighter text-text-primary">
-            Une association structurée en trois pôles
-          </h2>
-          <p className="mt-4 text-base text-text-secondary leading-relaxed max-w-[58ch]">
-            Chaque pôle dispose de son propre champ d&apos;action et fonctionne
-            de manière autonome, tout en collaborant avec les autres lorsque les
-            projets le nécessitent.
-          </p>
-        </FadeIn>
-
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {poles.map((pole) => (
-            <StaggerItem key={pole.name}>
-              <div className="h-full rounded-2xl border border-border-subtle bg-surface-elevated p-7 hover:border-primary-200 hover:shadow-sm transition-all duration-300">
-                <div className="h-12 w-12 rounded-xl bg-primary-50 flex items-center justify-center mb-5">
-                  <pole.icon size={24} weight="duotone" className="text-primary" />
-                </div>
-                <h3 className="font-heading text-xl font-semibold tracking-tight text-text-primary mb-2">
-                  {pole.name}
-                </h3>
-                <p className="text-sm md:text-base text-text-secondary leading-relaxed">
-                  {pole.desc}
-                </p>
-                <ul className="mt-5 space-y-2.5 border-t border-border-subtle pt-5">
-                  {pole.items.map((it) => (
-                    <li
-                      key={it}
-                      className="flex items-start gap-2.5 text-sm text-text-secondary"
-                    >
-                      <CheckCircle
-                        size={16}
-                        weight="duotone"
-                        className="text-primary mt-0.5 shrink-0"
-                      />
-                      {it}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </Section>
-
-
-
-      {/* Gouvernance */}
-      <Section>
-        <FadeIn className="max-w-3xl mb-12 md:mb-14">
-          <span className="text-xs font-medium tracking-widest uppercase text-primary">
-            Gouvernance
-          </span>
-          <h2 className="mt-3 font-heading text-3xl md:text-4xl font-bold tracking-tighter text-text-primary">
-            Une association pilotée par ses adhérents
-          </h2>
-          <p className="mt-4 text-base text-text-secondary leading-relaxed max-w-[58ch]">
-            À AFIA, les adhérents fonctionnent comme des sociétaires : ils
-            ne se contentent pas de participer, ils décident. Ce sont eux qui
-            orientent la vie et les missions de l&apos;association.
-          </p>
-        </FadeIn>
-
-        {/* Le pouvoir des adhérents */}
-        <FadeIn>
-          <div className="relative overflow-hidden rounded-3xl bg-primary-950 p-8 md:p-12">
-            <div className="absolute -top-24 -right-20 h-72 w-72 rounded-full bg-primary-700/30 blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-primary-800/25 blur-3xl pointer-events-none" />
-            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <div>
-                <span className="text-xs font-medium tracking-widest uppercase text-primary-300">
-                  Au cœur des décisions
-                </span>
-                <h3 className="mt-3 font-heading text-2xl md:text-3xl font-bold tracking-tight text-white leading-snug">
-                  Ce sont les adhérents qui donnent le cap
-                </h3>
-                <p className="mt-4 text-primary-100 leading-relaxed max-w-[46ch]">
-                  Réunis en assemblée générale, les adhérents votent ensemble les
-                  grandes orientations de l&apos;association. Chacun pèse sur ce
-                  qu&apos;AFIA met en place, au plus près des besoins du
-                  quartier.
-                </p>
-              </div>
-              <div className="space-y-3">
-                {memberPower.map((item) => (
-                  <div
-                    key={item.title}
-                    className="flex items-start gap-4 rounded-2xl bg-white/5 border border-white/10 p-5"
-                  >
-                    <div className="h-11 w-11 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
-                      <item.icon
-                        size={22}
-                        weight="duotone"
-                        className="text-primary-200"
-                      />
-                    </div>
-                    <div>
-                      <p className="font-heading font-semibold text-white">
-                        {item.title}
-                      </p>
-                      <p className="text-sm text-primary-200 mt-1 leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+      {/* ════ Fiche d'identité ════ */}
+      <Section className="bg-surface-muted py-16 md:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+          <FadeIn className="lg:col-span-4">
+            <div className="h-12 w-12 rounded-2xl bg-primary-950 flex items-center justify-center mb-5">
+              <IdentificationCard size={24} weight="duotone" className="text-accent-300" />
             </div>
-          </div>
-        </FadeIn>
-
-        {/* Assemblée générale — banderole éditoriale pleine largeur */}
-        <FadeIn>
-          <div className="mt-6 rounded-3xl border border-primary/15 bg-primary-50/40 p-8 md:p-10 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center">
-            <div className="md:col-span-1 flex md:flex-col items-center justify-start">
-              <div className="h-14 w-14 rounded-2xl bg-primary-100 flex items-center justify-center">
-                <UsersThree size={28} weight="duotone" className="text-primary-700" />
-              </div>
-            </div>
-            <div className="md:col-span-5">
-              <span className="eyebrow text-primary-700 mb-2">Instance souveraine</span>
-              <h3 className="mt-2 font-heading font-black text-2xl md:text-3xl tracking-[-0.025em] text-primary-950 leading-tight">
-                Assemblée générale
-              </h3>
-            </div>
-            <div className="md:col-span-6 md:border-l md:border-primary/15 md:pl-10">
-              <p className="text-base text-text-secondary leading-relaxed">
-                Instance souveraine de l&apos;association : chaque adhérent y
-                dispose d&apos;une voix égale pour voter les décisions, valider
-                le budget et fixer les grandes orientations.
-              </p>
-            </div>
-          </div>
-        </FadeIn>
-
-        {/* Le bureau — layout éditorial */}
-        <FadeIn>
-          <div className="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
-            {/* Intro */}
-            <div className="lg:col-span-4 rounded-3xl bg-primary-950 grain p-8 md:p-10 relative overflow-hidden flex flex-col justify-between">
-              <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-primary-700/30 blur-3xl pointer-events-none" />
-              <div className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-accent/15 blur-3xl pointer-events-none" />
-              <div className="relative">
-                <ShieldCheck size={28} weight="duotone" className="text-accent-300 mb-6" />
-                <span className="eyebrow text-accent-300 mb-3">Gouvernance</span>
-                <h3 className="mt-2 font-heading font-black text-2xl md:text-3xl tracking-[-0.025em] text-white leading-tight">
-                  Le bureau
-                </h3>
-                <p className="mt-5 text-sm leading-relaxed text-primary-100">
-                  Pilotage, suivi financier et coordination des actions — dans
-                  le cadre défini par les adhérents en assemblée générale.
-                </p>
-              </div>
-            </div>
-
-            {/* Membres */}
-            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
-              {bureau.map((member) => (
-                <div
-                  key={member.role}
-                  className="group rounded-3xl border border-border-subtle bg-surface-elevated p-7 flex flex-col gap-5 hover:border-primary/30 hover:-translate-y-1 hover:shadow-diffuse transition-all duration-300"
-                >
-                  {/* Initiale éditoriale */}
-                  <div
-                    className="h-16 w-16 rounded-2xl flex items-center justify-center"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, var(--color-primary-100) 0%, var(--color-primary-200) 100%)",
-                    }}
-                  >
-                    <span className="font-heading font-black text-[28px] leading-none tracking-[-0.04em] text-primary-700">
-                      {member.person.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="eyebrow text-primary-600 mb-1">
-                      {member.role}
-                    </span>
-                    <p className="mt-2 font-heading font-black text-xl tracking-[-0.025em] text-text-primary">
-                      {member.person}
-                    </p>
-                  </div>
+            <span className="eyebrow text-primary-700 mb-3">Transparence</span>
+            <h2 className="font-heading font-black text-[clamp(26px,3vw,38px)] tracking-[-0.025em] text-primary-950 leading-[1.05]">
+              Fiche d’identité
+            </h2>
+            <p className="mt-4 text-base text-text-secondary leading-relaxed">
+              Les informations officielles de l’association.
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.1} className="lg:col-span-8">
+            <dl className="rounded-3xl border border-border-subtle bg-surface-elevated divide-y divide-border-subtle">
+              {identite.map((row) => (
+                <div key={row.label} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6 px-6 md:px-8 py-4">
+                  <dt className="sm:w-32 shrink-0 text-xs uppercase tracking-[0.12em] text-text-muted font-semibold">
+                    {row.label}
+                  </dt>
+                  <dd className="text-sm md:text-base text-text-primary font-medium">{row.value}</dd>
                 </div>
               ))}
-            </div>
-          </div>
-        </FadeIn>
+            </dl>
+          </FadeIn>
+        </div>
       </Section>
 
-      {/* Partenaires */}
-      <Section className="bg-surface-elevated">
-        <FadeIn className="text-center mb-14">
-          <span className="text-xs font-medium tracking-widest uppercase text-primary">
-            Partenaires
-          </span>
-          <h2 className="mt-3 font-heading text-3xl md:text-4xl font-bold tracking-tighter text-text-primary">
-            Ils nous font confiance
-          </h2>
-          <p className="mt-4 text-base text-text-secondary leading-relaxed max-w-[52ch] mx-auto">
-            Des partenaires engagés à nos côtés pour renforcer l&apos;impact de nos
-            actions sur le terrain.
-          </p>
-        </FadeIn>
-
-        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {partners.map((partner) => (
-            <StaggerItem key={partner.name}>
-              <div className="group flex flex-col items-center rounded-2xl border border-border-subtle bg-surface hover:border-primary-200 hover:shadow-sm transition-all duration-300 p-6 gap-4">
-                <div className="relative w-full h-16 flex items-center justify-center">
-                  <Image
-                    src={partner.logo}
-                    alt={`Logo ${partner.name}`}
-                    fill
-                    className="object-contain transition-all duration-300"
-                    sizes="(min-width: 768px) 20vw, 40vw"
-                  />
-                </div>
-                <div className="text-center">
-                  <p className="text-[11px] uppercase tracking-wider text-primary font-semibold">
-                    {partner.category}
-                  </p>
-                  <p className="text-xs text-text-secondary mt-0.5 leading-snug">{partner.name}</p>
-                </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </Section>
-
-      {/* CTA */}
-      <Section className="pt-0">
+      {/* ════ CTA ════ */}
+      <Section className="py-16 md:py-24">
         <FadeIn>
-          <div className="rounded-3xl bg-primary-950 p-10 md:p-14 relative overflow-hidden">
+          <div className="grain rounded-[28px] bg-primary-950 p-8 md:p-14 relative overflow-hidden">
             <div className="absolute -top-20 -right-16 h-64 w-64 rounded-full bg-primary-700/30 blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-primary-800/25 blur-3xl pointer-events-none" />
-            <div className="relative">
-              <p className="text-xs uppercase tracking-widest text-primary-200 font-semibold">
-                Passer à l&apos;action
-              </p>
-              <h2 className="mt-3 font-heading text-3xl md:text-4xl font-bold tracking-tighter text-white max-w-3xl leading-[1.1]">
-                Rejoindre une association qui agit concrètement
-              </h2>
-              <p className="mt-4 text-primary-100 max-w-[58ch] leading-relaxed">
-                Adhérez, devenez bénévole ou échangez avec AFIA pour
-                construire les prochains projets du quartier.
-              </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+            <div className="absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-accent/15 blur-3xl pointer-events-none" />
+            <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+              <div className="lg:col-span-7">
+                <span className="eyebrow text-accent-300 mb-4">Passer à l’action</span>
+                <h2 className="mt-3 font-heading font-black text-[clamp(30px,4vw,52px)] leading-[0.98] tracking-[-0.03em] text-white">
+                  Rejoignez une association<br />qui agit concrètement.
+                </h2>
+                <p className="mt-5 text-lg text-primary-100 max-w-[50ch] leading-relaxed">
+                  Adhérez, devenez bénévole ou échangez avec nous pour construire
+                  les prochains projets du quartier.
+                  {!ADHESIONS_OUVERTES && (
+                    <span className="block mt-2 text-sm text-primary-300">
+                      Prochaine session d’adhésion : {PROCHAINE_SESSION}.
+                    </span>
+                  )}
+                </p>
+              </div>
+              <div className="lg:col-span-5 flex flex-col gap-3">
                 <Link href="/adhesion">
-                  <Button
-                    size="lg"
-                    className="bg-white text-primary-950 hover:bg-zinc-100 border-none"
-                  >
-                    Adhérer
+                  <Button size="lg" className="w-full justify-between bg-accent text-white hover:bg-accent-700 border-none">
+                    {LIBELLE_BOUTON_ADHESION}
                     <ArrowRight size={18} weight="bold" />
                   </Button>
                 </Link>
-                <Link href="/contact">
+                <Link href="/#benevoles">
                   <Button
                     variant="outline"
                     size="lg"
-                    className="border-white/40 text-white hover:bg-white/10 hover:border-white/60 bg-transparent"
+                    className="w-full justify-between border-white/30 text-white hover:bg-white/10 hover:border-white/60 hover:text-white bg-transparent"
                   >
-                    <HandHeart size={18} weight="duotone" />
                     Devenir bénévole
+                    <HandHeart size={18} weight="duotone" />
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
+                  <Button variant="ghost" size="lg" className="w-full justify-between text-white hover:bg-white/10 hover:text-white">
+                    Nous contacter
                     <EnvelopeSimple size={18} weight="duotone" />
-                    Contact
                   </Button>
                 </Link>
               </div>

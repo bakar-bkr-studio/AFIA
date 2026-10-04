@@ -6,7 +6,9 @@ import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import {
+  ArrowDown,
   ArrowRight,
+  Briefcase,
   CalendarBlank,
   ChalkboardTeacher,
   ClockAfternoon,
@@ -16,111 +18,184 @@ import {
   Heartbeat,
   MapPin,
   MegaphoneSimple,
-  MicrophoneStage,
-  Plant,
-  Scales,
+  Phone,
   ShieldCheck,
-  Sparkle,
+  Tag,
   UsersThree,
 } from "@phosphor-icons/react";
+import type { Icon } from "@phosphor-icons/react";
+import type { ReactNode } from "react";
+
+/* ── Coordonnées ── */
+
+const contactEmail = "famillesdicietdailleurs@gmail.com";
+const contactPhoneDisplay = "09.81.10.90.27";
+const contactPhoneHref = "+33981109027";
+const homeworkMailto = `mailto:${contactEmail}?subject=${encodeURIComponent("[Site AFIA] Inscription aide aux devoirs")}&body=${encodeURIComponent("Bonjour,\n\nJe souhaite inscrire mon enfant à l'aide aux devoirs.\n\nNom et prénom de l'enfant :\nClasse :\nNom du parent :\nTéléphone :\n\nMerci.")}`;
+const volunteerMailto = `mailto:${contactEmail}?subject=${encodeURIComponent("[Site AFIA] Bénévolat")}`;
 
 /* ── Données ── */
 
-const poleInfo = {
-  audience:
-    "Familles, parents, enfants en difficulté scolaire, habitants du quartier",
-  mission:
-    "Écoute, prévention et accompagnement des familles et des jeunes face aux difficultés du quotidien.",
-  impact:
-    "Un accès simplifié à l'information, aux droits et au soutien éducatif, directement au cœur du quartier.",
-};
+const audience =
+  "Familles, parents, enfants en difficulté scolaire et habitants du quartier.";
 
-const homeworkHighlights = [
-  { icon: GraduationCap, title: "Du CP à la 3ème" },
-  { icon: CalendarBlank, title: "Tous les mardis et vendredis" },
-  { icon: ClockAfternoon, title: "16h30 – 18h" },
-  { icon: ChalkboardTeacher, title: "Professeure des écoles + bénévoles" },
+const axes = [
+  {
+    icon: GraduationCap,
+    verb: "Accompagner",
+    title: "Aide aux devoirs",
+    desc: "Deux séances par semaine pour les enfants du CP à la 3ème.",
+    href: "#aide-aux-devoirs",
+  },
+  {
+    icon: MegaphoneSimple,
+    verb: "Informer",
+    title: "Forums santé, justice et emploi",
+    desc: "Les institutions viennent répondre aux habitants, dans le quartier.",
+    href: "#forums",
+  },
+  {
+    icon: ShieldCheck,
+    verb: "Prévenir",
+    title: "Prévention des rixes",
+    desc: "Des moments partagés pour apaiser les tensions entre jeunes.",
+    href: "#prevention",
+  },
+];
+
+const homeworkInfos: { icon: Icon; label: string; value: string }[] = [
+  { icon: GraduationCap, label: "Pour qui", value: "Enfants du CP à la 3ème" },
+  { icon: CalendarBlank, label: "Quand", value: "Tous les mardis et vendredis" },
+  { icon: ClockAfternoon, label: "Horaires", value: "16h30 – 18h" },
+  { icon: MapPin, label: "Où", value: "Local de l’association, 4 Square de la Brie, Meaux" },
+  { icon: ChalkboardTeacher, label: "Encadrement", value: "Une professeure des écoles et des bénévoles" },
+  { icon: Tag, label: "Tarif", value: "Gratuit" },
+  { icon: UsersThree, label: "Places", value: "10 élèves maximum" },
 ];
 
 const forums = [
   {
-    icon: MegaphoneSimple,
+    icon: Briefcase,
+    title: "Forum insertion jeunes",
+    tag: "Septembre 2026",
+    facts: ["16 septembre 2026", "Square de la Brie", "Gratuit · 16 à 25 ans"],
+    desc: "Huit structures réunies pour informer et orienter les jeunes vers l’emploi et la formation : Mission Locale, EPIDE, CIO, École de la 2e Chance, ADSEA 77 et d’autres. Organisé avec la Ville de Meaux.",
+    href: "/actualites",
+  },
+  {
+    icon: Heartbeat,
     title: "Forum santé",
-    desc: "Des acteurs majeurs du territoire, dont la CPAM, se sont déplacés dans le quartier pour proposer des échanges, des conseils et des actions de dépistage directement accessibles aux habitants.",
+    tag: "Déjà organisé",
+    facts: [],
+    desc: "La CPAM et d’autres acteurs de la santé sont venus dans le quartier : échanges, conseils et dépistages accessibles à tous.",
   },
   {
     icon: ShieldCheck,
     title: "Forum justice",
-    desc: "Des professionnels du droit, avocats et acteurs du secteur judiciaire, sont venus à la rencontre des habitants pour répondre aux questions, expliquer les droits et accompagner les situations du quotidien.",
+    tag: "Déjà organisé",
+    facts: [],
+    desc: "Des avocats et professionnels du droit ont répondu aux questions des habitants et expliqué leurs droits au quotidien.",
   },
 ];
 
 const forumStrengths = [
   "Accès direct aux professionnels",
   "Échanges simples et accessibles",
-  "Présence d'acteurs institutionnels",
+  "Sans se déplacer",
 ];
 
-const projectFacts = [
-  { icon: MapPin, label: "Lieu", value: "Colisée de Meaux" },
+const mealFacts = [
   { icon: CalendarBlank, label: "Date", value: "2 mars 2026" },
-  { icon: UsersThree, label: "Participation", value: "+230 personnes accueillies" },
-  { icon: MicrophoneStage, label: "Temps fort", value: "Présence du maire" },
+  { icon: MapPin, label: "Lieu", value: "Colisée de Meaux" },
+  { icon: UsersThree, label: "Participants", value: "+230 personnes" },
 ];
 
-const projectImpact = [
-  "Renforcement du lien social",
-  "Sensibilisation des jeunes",
-  "Action solidaire concrète",
+const paintballFacts = [
+  { icon: CalendarBlank, label: "Date", value: "30 avril 2026" },
+  { icon: UsersThree, label: "Participants", value: "18 jeunes du quartier" },
 ];
 
-const upcomingProjects = [
-  {
-    icon: MegaphoneSimple,
-    title: "Conférences sur les rixes",
-    date: "2026",
-    status: "À venir",
-    desc: "Trois conférences animées par un sociologue pour sensibiliser les parents aux tensions entre jeunes. 150 participants attendus.",
-  },
-  {
-    icon: Plant,
-    title: "Atelier jardinage et parentalité",
-    date: "2026",
-    status: "À confirmer",
-    desc: "Un projet éducatif et citoyen mêlant jardinage, parentalité et échanges intergénérationnels. Parents-enfants et seniors, environ 30 participants.",
-  },
-  {
-    icon: Heartbeat,
-    title: "Initiative bien-être femmes",
-    date: "2026",
-    status: "À confirmer",
-    desc: "Une initiative dédiée au bien-être et à l'expression des jeunes filles et femmes du quartier.",
-  },
+const paintballGallery = [
+  "https://i.imgur.com/vVP44rF.jpeg",
+  "https://i.imgur.com/yEw1KzY.jpeg",
+  "https://i.imgur.com/HrwYaEr.jpeg",
+  "https://i.imgur.com/HcRO6qo.jpeg",
 ];
+
+/* ── Petits composants ── */
+
+function SectionHeading({
+  eyebrow,
+  title,
+  intro,
+}: {
+  eyebrow: string;
+  title: ReactNode;
+  intro?: string;
+}) {
+  return (
+    <FadeIn className="max-w-3xl mb-12 md:mb-14">
+      <span className="eyebrow text-primary-700 mb-3">{eyebrow}</span>
+      <h2 className="font-heading font-black text-[clamp(28px,3.5vw,44px)] tracking-[-0.025em] text-primary-950 leading-[1.05]">
+        {title}
+      </h2>
+      {intro && (
+        <p className="mt-5 text-base md:text-lg leading-relaxed text-text-secondary max-w-[60ch]">
+          {intro}
+        </p>
+      )}
+    </FadeIn>
+  );
+}
+
+function FactRow({ facts }: { facts: { icon: Icon; label: string; value: string }[] }) {
+  return (
+    <dl className="flex flex-wrap gap-x-8 gap-y-4 border-y border-border-subtle py-5">
+      {facts.map((fact) => (
+        <div key={fact.label} className="flex items-center gap-3">
+          <div className="h-9 w-9 rounded-lg bg-primary-50 flex items-center justify-center shrink-0">
+            <fact.icon size={18} weight="duotone" className="text-primary-700" />
+          </div>
+          <div>
+            <dt className="text-[10px] uppercase tracking-[0.14em] text-primary-700 font-semibold">
+              {fact.label}
+            </dt>
+            <dd className="text-sm text-text-primary font-medium">{fact.value}</dd>
+          </div>
+        </div>
+      ))}
+    </dl>
+  );
+}
 
 /* ── Composant ── */
 
 export function PoleSocietal() {
   return (
     <>
-      {/* ════ Hero — sobre, éditorial ════ */}
-      <section className="relative pt-32 md:pt-40 pb-20 md:pb-28 overflow-hidden bg-paper-warm">
+      {/* ════ Hero ════ */}
+      <section className="relative pt-14 md:pt-20 pb-20 md:pb-28 overflow-hidden bg-paper-warm">
         <div className="grain-light absolute inset-0 pointer-events-none" />
         <div className="relative mx-auto max-w-[1400px] px-6 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end">
             <FadeIn className="lg:col-span-7">
-              <span className="eyebrow text-primary-700 mb-6">
-                Pôle sociétal · accompagnement & prévention
-              </span>
+              <span className="eyebrow text-primary-700 mb-6">Pôle sociétal</span>
               <h1 className="font-heading font-black text-[clamp(44px,6.5vw,88px)] leading-[0.95] tracking-[-0.03em] text-primary-950 mt-4 text-balance">
                 Accompagner.<br />
                 Informer.<br />
                 <span className="text-primary">Prévenir.</span>
               </h1>
-              <p className="mt-8 text-lg md:text-xl leading-relaxed text-text-secondary max-w-[58ch]">
-                Aide aux devoirs, forums santé et justice, prévention des
-                rixes, accompagnement des familles : le pôle sociétal s'attaque
-                aux enjeux structurants du quartier.
+              <p className="mt-8 text-lg md:text-xl leading-relaxed text-text-secondary max-w-[54ch]">
+                Le pôle sociétal soutient les familles et les jeunes de Beauval
+                face aux difficultés du quotidien : école, accès aux droits,
+                santé et tensions dans le quartier.
+              </p>
+              <p className="mt-5 flex items-start gap-2 text-sm text-text-muted max-w-[54ch]">
+                <UsersThree size={18} weight="duotone" className="text-primary-700 shrink-0 mt-0.5" />
+                <span>
+                  <span className="font-semibold text-text-primary">Pour qui :</span>{" "}
+                  {audience}
+                </span>
               </p>
             </FadeIn>
 
@@ -136,150 +211,139 @@ export function PoleSocietal() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary-950/55 via-primary-950/10 to-transparent" />
                 </div>
-                <div className="absolute -bottom-6 -left-6 md:-left-10 glass rounded-2xl px-6 py-5 max-w-[240px]">
-                  <p className="font-heading font-black text-[44px] leading-none text-primary-800 tracking-[-0.04em]">
-                    +230
+                <a
+                  href="#aide-aux-devoirs"
+                  className="absolute -bottom-6 left-4 sm:-left-6 md:-left-10 glass rounded-2xl px-6 py-5 max-w-[260px] group"
+                >
+                  <p className="eyebrow text-primary-700">Aide aux devoirs</p>
+                  <p className="mt-2 font-heading font-black text-[28px] leading-none text-primary-800 tracking-[-0.03em]">
+                    Mar. & Ven.
                   </p>
-                  <p className="mt-2 text-xs text-text-muted uppercase tracking-[0.14em] font-semibold">
-                    personnes accueillies au repas solidaire 2026
+                  <p className="mt-2 text-sm text-text-secondary font-medium flex items-center gap-1.5">
+                    16h30 – 18h · CP à 3ème
+                    <ArrowDown size={14} weight="bold" className="transition-transform group-hover:translate-y-0.5" />
                   </p>
-                </div>
+                </a>
               </div>
             </FadeIn>
           </div>
         </div>
       </section>
 
-      {/* ════ Présentation — bento ════ */}
-      <Section>
-        <FadeIn className="max-w-3xl mb-12">
-          <span className="eyebrow text-primary-700 mb-3">Ce qu'est ce pôle</span>
-          <h2 className="font-heading font-black text-[clamp(28px,3.5vw,44px)] tracking-[-0.025em] text-primary-950 leading-[1.05]">
-            Au plus près<br />
-            <span className="text-primary">des familles.</span>
-          </h2>
-        </FadeIn>
-
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6">
-          <FadeIn className="md:col-span-7">
-            <div className="grain h-full rounded-3xl bg-primary-950 p-8 md:p-10 relative overflow-hidden">
-              <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary-700/30 blur-3xl pointer-events-none" />
-              <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-primary-800/25 blur-3xl pointer-events-none" />
-              <div className="relative">
-                <Scales size={28} weight="duotone" className="text-accent-300 mb-6" />
-                <span className="eyebrow text-accent-300 mb-3">Sa mission</span>
-                <p className="mt-2 font-heading font-bold text-2xl md:text-[28px] leading-[1.2] tracking-tight text-white max-w-[36ch]">
-                  {poleInfo.mission}
+      {/* ════ Nos 3 axes — sommaire cliquable ════ */}
+      <Section className="py-16 md:py-20">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          {axes.map((axe, i) => (
+            <StaggerItem key={axe.href}>
+              <a
+                href={axe.href}
+                className="group h-full flex flex-col rounded-3xl border border-border-subtle bg-surface-elevated p-7 hover:border-primary/30 hover:shadow-diffuse transition-all duration-300"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div className="h-12 w-12 rounded-2xl bg-primary-50 flex items-center justify-center">
+                    <axe.icon size={24} weight="duotone" className="text-primary-700" />
+                  </div>
+                  <span className="font-heading font-black text-sm text-text-muted">
+                    0{i + 1}
+                  </span>
+                </div>
+                <span className="eyebrow text-primary-700 mb-2">{axe.verb}</span>
+                <h2 className="font-heading font-bold text-xl leading-tight tracking-tight text-text-primary">
+                  {axe.title}
+                </h2>
+                <p className="mt-2 text-sm text-text-secondary leading-relaxed flex-1">
+                  {axe.desc}
                 </p>
-                <p className="mt-6 text-sm leading-relaxed text-primary-100 max-w-[50ch]">
-                  L'AFIA porte des actions ancrées dans le quotidien : soutien
-                  scolaire régulier, forums au pied des immeubles, repas
-                  citoyens — pour rendre les droits, l'information et le
-                  soutien accessibles à tous.
-                </p>
-              </div>
-            </div>
-          </FadeIn>
-
-          <div className="md:col-span-5 grid grid-cols-1 gap-5 md:gap-6">
-            <FadeIn delay={0.1}>
-              <div className="h-full rounded-3xl border border-border-subtle bg-surface-elevated p-7">
-                <UsersThree size={24} weight="duotone" className="text-primary mb-4" />
-                <span className="eyebrow text-primary-700 mb-2">À qui</span>
-                <p className="mt-2 font-heading font-bold text-lg leading-snug text-text-primary">
-                  {poleInfo.audience}
-                </p>
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.15}>
-              <div className="h-full rounded-3xl border border-border-subtle bg-surface-elevated p-7">
-                <HandHeart size={24} weight="duotone" className="text-primary mb-4" />
-                <span className="eyebrow text-primary-700 mb-2">L'apport</span>
-                <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                  {poleInfo.impact}
-                </p>
-              </div>
-            </FadeIn>
-          </div>
-        </div>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                  En savoir plus
+                  <ArrowDown size={14} weight="bold" className="transition-transform group-hover:translate-y-0.5" />
+                </span>
+              </a>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
       </Section>
 
-      {/* ════ Action phare — aide aux devoirs (mise en page magazine) ════ */}
-      <Section className="bg-surface-muted">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-14 items-center">
+      {/* ════ 01 — Aide aux devoirs ════ */}
+      <Section id="aide-aux-devoirs" className="bg-surface-muted scroll-mt-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-14 items-start">
           <FadeIn className="lg:col-span-5">
-            <div className="relative pb-6 pr-6">
-              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-surface-muted shadow-diffuse">
-                <Image
-                  src="https://i.imgur.com/IHB9NJd.jpeg"
-                  alt="Événement associatif AFIA à Beauval"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute bottom-0 right-0 rounded-2xl bg-surface-elevated border border-border-subtle px-5 py-4 shadow-diffuse">
-                <p className="eyebrow text-primary-700">Action phare</p>
-                <p className="mt-1 font-heading font-bold text-base tracking-tight text-text-primary">
-                  Aide aux devoirs
-                </p>
-              </div>
+            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-surface-muted shadow-diffuse">
+              <Image
+                src="https://i.imgur.com/IHB9NJd.jpeg"
+                alt="Séance d'aide aux devoirs à l'AFIA"
+                fill
+                className="object-cover"
+              />
             </div>
           </FadeIn>
 
           <FadeIn delay={0.1} className="lg:col-span-7">
-            <span className="eyebrow text-primary-700 mb-4">
-              Accompagnement scolaire
-            </span>
-            <h2 className="mt-2 font-heading font-black text-[clamp(28px,3.5vw,44px)] leading-[1.05] tracking-[-0.025em] text-primary-950 max-w-[18ch]">
-              Un cadre régulier pour la réussite des enfants.
+            <span className="eyebrow text-primary-700 mb-4">01 · Accompagner</span>
+            <h2 className="mt-2 font-heading font-black text-[clamp(28px,3.5vw,44px)] leading-[1.05] tracking-[-0.025em] text-primary-950 max-w-[20ch]">
+              Aide aux devoirs
             </h2>
-            <p className="mt-6 text-base md:text-lg text-text-secondary leading-relaxed max-w-[58ch]">
-              Nous accompagnons les enfants dans leur réussite scolaire en leur
-              offrant un cadre structuré, bienveillant et régulier.
+            <p className="mt-5 text-base md:text-lg text-text-secondary leading-relaxed max-w-[58ch]">
+              Un cadre régulier, bienveillant et structuré pour aider les
+              enfants à faire leurs devoirs et à reprendre confiance à l’école.
             </p>
 
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {homeworkHighlights.map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-2xl border border-border-subtle bg-surface-elevated p-4 flex items-start gap-3"
-                >
-                  <div className="h-10 w-10 rounded-xl bg-primary-50 flex items-center justify-center shrink-0">
-                    <item.icon size={20} weight="duotone" className="text-primary-700" />
+            {/* Infos pratiques */}
+            <div className="mt-8 rounded-3xl border border-border-subtle bg-surface-elevated p-6 md:p-8">
+              <p className="eyebrow text-primary-700 mb-5">Infos pratiques</p>
+              <dl className="divide-y divide-border-subtle">
+                {homeworkInfos.map((info) => (
+                  <div key={info.label} className="flex items-center gap-4 py-3.5 first:pt-0 last:pb-0">
+                    <div className="h-9 w-9 rounded-lg bg-primary-50 flex items-center justify-center shrink-0">
+                      <info.icon size={18} weight="duotone" className="text-primary-700" />
+                    </div>
+                    <div className="min-w-0 flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-4">
+                      <dt className="sm:w-28 shrink-0 text-[11px] sm:text-xs uppercase tracking-[0.12em] text-text-muted font-semibold">
+                        {info.label}
+                      </dt>
+                      <dd className="text-sm md:text-base text-text-primary font-medium">
+                        {info.value}
+                      </dd>
+                    </div>
                   </div>
-                  <p className="text-sm text-text-primary leading-relaxed pt-1.5 font-medium">
-                    {item.title}
-                  </p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </dl>
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Link href="/contact">
-                <Button variant="outline">Se renseigner</Button>
-              </Link>
+              <div className="mt-6 pt-6 border-t border-border-subtle">
+                <p className="text-sm text-text-secondary mb-4 leading-relaxed">
+                  <span className="font-semibold text-text-primary">Inscription obligatoire :</span>{" "}
+                  les places sont limitées. Envoyez-nous un e-mail pour
+                  demander l’inscription de votre enfant.
+                </p>
+                <a href={homeworkMailto} className="block sm:inline-block">
+                  <Button size="lg" className="w-full">
+                    <EnvelopeSimple size={18} weight="duotone" />
+                    Demander une inscription
+                  </Button>
+                </a>
+                <p className="mt-3 text-xs text-text-muted break-all">
+                  {contactEmail}
+                </p>
+              </div>
             </div>
           </FadeIn>
         </div>
       </Section>
 
-      {/* ════ Forums ════ */}
-      <Section>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-14">
+      {/* ════ 02 — Forums ════ */}
+      <Section id="forums" className="scroll-mt-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-14">
           <FadeIn className="lg:col-span-5">
-            <span className="eyebrow text-primary-700 mb-3">
-              Actions de terrain
-            </span>
+            <span className="eyebrow text-primary-700 mb-3">02 · Informer</span>
             <h2 className="font-heading font-black text-[clamp(28px,3.5vw,44px)] tracking-[-0.025em] text-primary-950 leading-[1.05]">
-              Informer<br />au pied<br />
-              <span className="text-primary">des immeubles.</span>
+              Des forums<br />
+              <span className="text-primary">au cœur du quartier.</span>
             </h2>
           </FadeIn>
           <FadeIn delay={0.1} className="lg:col-span-7 lg:pt-6">
             <p className="text-base md:text-lg leading-relaxed text-text-secondary max-w-[60ch]">
-              Permettre aux habitants d'accéder facilement à des informations
-              essentielles, sans contrainte de déplacement — en faisant venir
-              les institutions directement dans le quartier.
+              Nous faisons venir les institutions directement dans le quartier,
+              pour que chacun puisse poser ses questions et connaître ses droits.
             </p>
             <ul className="mt-6 flex flex-wrap gap-2">
               {forumStrengths.map((point) => (
@@ -294,297 +358,208 @@ export function PoleSocietal() {
           </FadeIn>
         </div>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
           {forums.map((forum) => (
             <StaggerItem key={forum.title}>
-              <article className="group h-full rounded-3xl border border-border-subtle bg-surface-elevated p-8 md:p-10 hover:border-primary/30 transition-colors duration-300">
-                <div className="h-14 w-14 rounded-2xl bg-primary-50 flex items-center justify-center mb-6">
-                  <forum.icon size={28} weight="duotone" className="text-primary-700" />
+              <article className="h-full flex flex-col rounded-3xl border border-border-subtle bg-surface-elevated p-8">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="h-14 w-14 rounded-2xl bg-primary-50 flex items-center justify-center">
+                    <forum.icon size={28} weight="duotone" className="text-primary-700" />
+                  </div>
+                  <span className="text-[11px] uppercase tracking-[0.14em] font-semibold px-3 py-1.5 rounded-full bg-primary-100 text-primary-800">
+                    {forum.tag}
+                  </span>
                 </div>
-                <h3 className="font-heading font-bold text-2xl leading-tight tracking-tight text-text-primary mb-4">
+                <h3 className="font-heading font-bold text-xl leading-tight tracking-tight text-text-primary mb-3">
                   {forum.title}
                 </h3>
-                <p className="text-base text-text-secondary leading-relaxed">
+                {forum.facts.length > 0 && (
+                  <ul className="mb-3 space-y-1 text-sm font-medium text-primary-800">
+                    {forum.facts.map((fact) => (
+                      <li key={fact}>{fact}</li>
+                    ))}
+                  </ul>
+                )}
+                <p className="text-sm text-text-secondary leading-relaxed flex-1">
                   {forum.desc}
                 </p>
+                {forum.href && (
+                  <Link
+                    href={forum.href}
+                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline underline-offset-4"
+                  >
+                    Lire l’actualité
+                    <ArrowRight size={14} weight="bold" />
+                  </Link>
+                )}
               </article>
             </StaggerItem>
           ))}
         </StaggerContainer>
       </Section>
 
-      {/* ════ Temps fort — repas solidaire (mise en page magazine) ════ */}
-      <Section className="bg-surface-muted">
-        <FadeIn className="max-w-3xl mb-14">
-          <span className="eyebrow text-primary-700 mb-3">Temps fort</span>
-          <h2 className="font-heading font-black text-[clamp(28px,3.5vw,44px)] tracking-[-0.025em] text-primary-950 leading-[1.05]">
-            Un repas pour<br />
-            rassembler et <span className="text-primary">sensibiliser.</span>
-          </h2>
-        </FadeIn>
+      {/* ════ 03 — Prévention des rixes ════ */}
+      <Section id="prevention" className="bg-surface-muted scroll-mt-20">
+        <SectionHeading
+          eyebrow="03 · Prévenir"
+          title={
+            <>
+              Prévenir les rixes<br />
+              <span className="text-primary">en créant du lien.</span>
+            </>
+          }
+          intro="Pour éviter les affrontements entre jeunes, nous organisons des moments où habitants, familles et jeunes se rencontrent et parlent respect, règles et vivre-ensemble."
+        />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
-          <FadeIn className="lg:col-span-5">
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-surface-muted shadow-diffuse">
-              <Image
-                src="https://i.imgur.com/yzcueAS.jpeg"
-                alt="Repas collectif et convivial"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.1} className="lg:col-span-7">
-            <div className="grid grid-cols-2 gap-3 md:gap-4 mb-8">
-              {projectFacts.map((fact) => (
-                <div
-                  key={fact.label}
-                  className="rounded-2xl border border-border-subtle bg-surface-elevated p-4"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="h-9 w-9 rounded-lg bg-primary-50 flex items-center justify-center shrink-0">
-                      <fact.icon size={18} weight="duotone" className="text-primary-700" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-[10px] uppercase tracking-[0.14em] text-primary-700 font-semibold">
-                        {fact.label}
-                      </p>
-                      <p className="text-sm text-text-primary mt-1 leading-snug font-medium">
-                        {fact.value}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="space-y-4 text-base text-text-secondary leading-relaxed">
-              <p>
-                Ce projet a permis de rassembler habitants, familles et jeunes
-                autour d'un moment convivial et engagé.
-              </p>
-              <p>
-                Au-delà du repas, la soirée a été l'occasion d'échanger autour
-                des problématiques liées aux rixes, dans un cadre ouvert et
-                intergénérationnel.
-              </p>
-              <p>
-                Des denrées alimentaires ont également été collectées puis
-                redistribuées à des associations venant en aide aux personnes
-                dans le besoin.
-              </p>
-            </div>
-
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {projectImpact.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-primary/15 bg-primary-50/40 px-4 py-3 text-sm text-primary-900 font-medium leading-snug"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-
-            <p className="mt-6 text-sm text-text-muted italic">
-              Projet mené avec l'appui du{" "}
-              <Link
-                href="/pole-jeunesse"
-                className="text-primary font-semibold hover:underline underline-offset-4"
-              >
-                pôle jeunesse
-              </Link>
-              .
-            </p>
-          </FadeIn>
-        </div>
-      </Section>
-
-      {/* ════ Action réalisée — Sortie Paintball ════ */}
-      <Section className="bg-surface-muted">
-        <FadeIn className="max-w-3xl mb-14">
-          <span className="eyebrow text-primary-700 mb-3">Action réalisée</span>
-          <h2 className="font-heading font-black text-[clamp(28px,3.5vw,44px)] tracking-[-0.025em] text-primary-950 leading-[1.05]">
-            Sortie Paintball :<br />
-            <span className="text-primary">citoyenneté par le sport.</span>
-          </h2>
-        </FadeIn>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
-          <FadeIn className="lg:col-span-5">
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-surface-muted shadow-diffuse">
-              <Image
-                src="https://i.imgur.com/bTwviXR.jpeg"
-                alt="Jeunes lors de la sortie paintball"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.1} className="lg:col-span-7">
-            <div className="grid grid-cols-2 gap-3 md:gap-4 mb-8">
-              <div className="rounded-2xl border border-border-subtle bg-surface-elevated p-4">
-                <div className="flex items-start gap-3">
-                  <div className="h-9 w-9 rounded-lg bg-primary-50 flex items-center justify-center shrink-0">
-                    <CalendarBlank size={18} weight="duotone" className="text-primary-700" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[10px] uppercase tracking-[0.14em] text-primary-700 font-semibold">
-                      Date
-                    </p>
-                    <p className="text-sm text-text-primary mt-1 leading-snug font-medium">
-                      Jeudi 30 avril 2026
-                    </p>
-                  </div>
-                </div>
+        <div className="space-y-16 md:space-y-24">
+          {/* Repas solidaire */}
+          <article className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
+            <FadeIn className="lg:col-span-5">
+              <div className="relative aspect-[4/3] lg:aspect-[4/5] rounded-3xl overflow-hidden bg-surface-muted shadow-diffuse">
+                <Image
+                  src="https://i.imgur.com/yzcueAS.jpeg"
+                  alt="Repas solidaire au Colisée de Meaux"
+                  fill
+                  className="object-cover"
+                />
               </div>
-              <div className="rounded-2xl border border-border-subtle bg-surface-elevated p-4">
-                <div className="flex items-start gap-3">
-                  <div className="h-9 w-9 rounded-lg bg-primary-50 flex items-center justify-center shrink-0">
-                    <UsersThree size={18} weight="duotone" className="text-primary-700" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[10px] uppercase tracking-[0.14em] text-primary-700 font-semibold">
-                      Participants
-                    </p>
-                    <p className="text-sm text-text-primary mt-1 leading-snug font-medium">
-                      18 jeunes du quartier
-                    </p>
-                  </div>
-                </div>
+            </FadeIn>
+
+            <FadeIn delay={0.1} className="lg:col-span-7">
+              <span className="inline-block rounded-full bg-primary-100 text-primary-800 text-[11px] uppercase tracking-[0.14em] font-semibold px-3 py-1.5 mb-4">
+                Action réalisée
+              </span>
+              <h3 className="font-heading font-black text-[clamp(24px,2.6vw,34px)] leading-[1.1] tracking-[-0.02em] text-primary-950">
+                Repas solidaire
+              </h3>
+              <div className="mt-6">
+                <FactRow facts={mealFacts} />
               </div>
-            </div>
-
-            <div className="space-y-4 text-base text-text-secondary leading-relaxed">
-              <p>
-                Une action innovante de sensibilisation à la citoyenneté par le sport. Les jeunes ont participé à une sortie paintball suivie d'un barbecue.
-              </p>
-              <p>
-                <span className="font-semibold text-text-primary">L'objectif pédagogique :</span> montrer que le sport, comme la société, fonctionne sur des règles. Comprendre que respecter ces règles, c'est respecter les autres, c'est penser au bien-être collectif et non seulement à son plaisir personnel.
-              </p>
-              <p>
-                Lors du barbecue, les jeunes ont pu discuter de ces valeurs dans un cadre convivial, créant un moment d'échange authentique autour de l'importance du respect et de la citoyenneté.
-              </p>
-            </div>
-
-            <div className="mt-6 rounded-2xl border border-primary/15 bg-primary-50/40 px-4 py-3">
-              <p className="text-sm text-primary-900 font-medium">
-                ✓ Une action du pôle sociétal pour lutter contre les rixes et prévenir les tensions entre jeunes par des valeurs de respect et d'engagement civique.
-              </p>
-            </div>
-          </FadeIn>
-        </div>
-
-        {/* Galerie photos */}
-        <FadeIn delay={0.15} className="mt-12">
-          <div className="rounded-2xl border border-border-subtle bg-surface-elevated p-6 md:p-8">
-            <p className="eyebrow text-primary-700 mb-6">Moments de l'événement</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-              {[
-                "https://i.imgur.com/vVP44rF.jpeg",
-                "https://i.imgur.com/yEw1KzY.jpeg",
-                "https://i.imgur.com/HrwYaEr.jpeg",
-                "https://i.imgur.com/HcRO6qo.jpeg",
-                "https://i.imgur.com/gVPK8Cp.jpeg",
-                "https://i.imgur.com/ojXbPZm.jpeg",
-                "https://i.imgur.com/NYZvvAd.jpeg",
-                "https://i.imgur.com/fzsG38l.jpeg",
-              ].map((img, i) => (
-                <div key={i} className="relative aspect-square rounded-xl overflow-hidden bg-surface-muted shadow-diffuse hover:shadow-diffuse transition-shadow">
-                  <Image
-                    src={img}
-                    alt={`Moment ${i + 1} de la sortie paintball`}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </FadeIn>
-      </Section>
-
-      {/* ════ Projets à venir ════ */}
-      <Section>
-        <FadeIn className="max-w-3xl mb-14">
-          <span className="eyebrow text-primary-700 mb-3">Projets à venir</span>
-          <h2 className="font-heading font-black text-[clamp(28px,3.5vw,44px)] tracking-[-0.025em] text-primary-950 leading-[1.05]">
-            D'autres actions<br />
-            en développement.
-          </h2>
-        </FadeIn>
-
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-          {upcomingProjects.map((project) => (
-            <StaggerItem key={project.title}>
-              <div className="h-full rounded-3xl border border-border-subtle bg-surface-elevated p-8 flex flex-col">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="h-14 w-14 rounded-2xl bg-primary-50 flex items-center justify-center">
-                    <project.icon size={28} weight="duotone" className="text-primary-700" />
-                  </div>
-                  <span
-                    className={`text-[11px] uppercase tracking-[0.14em] font-semibold px-3 py-1.5 rounded-full ${project.status === "À venir"
-                        ? "bg-primary-100 text-primary-800"
-                        : "bg-surface-muted text-text-secondary border border-border-subtle"
-                      }`}
-                  >
-                    {project.status}
-                  </span>
-                </div>
-                <p className="eyebrow text-text-muted mb-2">{project.date}</p>
-                <h3 className="font-heading font-bold text-xl leading-tight tracking-tight text-text-primary mb-3">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-text-secondary leading-relaxed">
-                  {project.desc}
+              <div className="mt-6 space-y-4 text-base text-text-secondary leading-relaxed max-w-[60ch]">
+                <p>
+                  Un moment convivial qui a réuni habitants, familles et jeunes,
+                  en présence du maire de Meaux. La soirée a permis d’échanger
+                  ouvertement, entre générations, sur les rixes.
+                </p>
+                <p>
+                  Des denrées alimentaires ont aussi été collectées puis
+                  redistribuées à des associations d’aide aux personnes dans le
+                  besoin.
                 </p>
               </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+              <p className="mt-5 text-sm text-text-muted">
+                Avec l’appui du{" "}
+                <Link
+                  href="/pole-jeunesse"
+                  className="text-primary font-semibold hover:underline underline-offset-4"
+                >
+                  pôle jeunesse
+                </Link>
+                .
+              </p>
+            </FadeIn>
+          </article>
+
+          {/* Sortie paintball */}
+          <article className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
+            <FadeIn className="lg:col-span-5 lg:order-2">
+              <div className="relative aspect-[4/3] lg:aspect-[4/5] rounded-3xl overflow-hidden bg-surface-muted shadow-diffuse">
+                <Image
+                  src="https://i.imgur.com/bTwviXR.jpeg"
+                  alt="Jeunes lors de la sortie paintball"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.1} className="lg:col-span-7 lg:order-1">
+              <span className="inline-block rounded-full bg-primary-100 text-primary-800 text-[11px] uppercase tracking-[0.14em] font-semibold px-3 py-1.5 mb-4">
+                Action réalisée
+              </span>
+              <h3 className="font-heading font-black text-[clamp(24px,2.6vw,34px)] leading-[1.1] tracking-[-0.02em] text-primary-950">
+                Sortie paintball : la citoyenneté par le sport
+              </h3>
+              <div className="mt-6">
+                <FactRow facts={paintballFacts} />
+              </div>
+              <div className="mt-6 space-y-4 text-base text-text-secondary leading-relaxed max-w-[60ch]">
+                <p>
+                  Une après-midi paintball suivie d’un barbecue pour faire
+                  passer un message simple : le sport, comme la société,
+                  fonctionne avec des règles.
+                </p>
+                <p>
+                  Respecter les règles, c’est respecter les autres. Autour du
+                  barbecue, les jeunes ont pu en parler librement.
+                </p>
+              </div>
+
+              <div className="mt-6 grid grid-cols-4 gap-2 md:gap-3">
+                {paintballGallery.map((img, i) => (
+                  <div
+                    key={img}
+                    className="relative aspect-square rounded-xl overflow-hidden bg-surface-muted"
+                  >
+                    <Image
+                      src={img}
+                      alt={`Moment ${i + 1} de la sortie paintball`}
+                      fill
+                      sizes="(min-width: 1024px) 12vw, 25vw"
+                      className="object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
+          </article>
+        </div>
       </Section>
 
-      {/* ════ CTA — bloc clair, plus institutionnel ════ */}
+      {/* ════ CTA ════ */}
       <Section className="pt-0">
         <FadeIn>
-          <div className="relative rounded-[28px] border border-primary/15 bg-paper-warm p-10 md:p-16 overflow-hidden">
+          <div className="relative rounded-[28px] border border-primary/15 bg-paper-warm p-8 md:p-16 overflow-hidden">
             <div className="grain-light absolute inset-0 pointer-events-none" />
-            <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
               <div className="lg:col-span-7">
-                <span className="eyebrow text-primary-700 mb-4">S'engager</span>
+                <span className="eyebrow text-primary-700 mb-4">Une question ? Envie d’aider ?</span>
                 <h2 className="mt-3 font-heading font-black text-[clamp(32px,4.5vw,60px)] leading-[0.95] tracking-[-0.03em] text-primary-950 max-w-[16ch]">
-                  Soutenir nos<br />
-                  <span className="text-primary">actions sociales.</span>
+                  Parlons-en<br />
+                  <span className="text-primary">ensemble.</span>
                 </h2>
                 <p className="mt-6 text-lg text-text-secondary max-w-[52ch] leading-relaxed">
-                  Rejoignez l'équipe, proposez une action ou prenez contact
-                  avec l'association pour contribuer au pôle sociétal.
+                  Pour inscrire votre enfant, poser une question, proposer une
+                  action ou devenir bénévole : l’équipe vous répond.
                 </p>
+                <ul className="mt-8 space-y-3 text-base">
+                  <li>
+                    <a href={`tel:${contactPhoneHref}`} className="inline-flex items-center gap-3 text-text-primary font-medium hover:text-primary transition-colors">
+                      <Phone size={20} weight="duotone" className="text-primary-700" />
+                      {contactPhoneDisplay}
+                    </a>
+                  </li>
+                  <li>
+                    <a href={`mailto:${contactEmail}`} className="inline-flex items-center gap-3 text-text-primary font-medium hover:text-primary transition-colors break-all">
+                      <EnvelopeSimple size={20} weight="duotone" className="text-primary-700 shrink-0" />
+                      {contactEmail}
+                    </a>
+                  </li>
+                </ul>
               </div>
               <div className="lg:col-span-5 flex flex-col gap-3">
                 <Link href="/contact">
                   <Button size="lg" className="w-full justify-between">
+                    Nous contacter
+                    <ArrowRight size={18} weight="bold" />
+                  </Button>
+                </Link>
+                <a href={volunteerMailto}>
+                  <Button variant="outline" size="lg" className="w-full justify-between">
                     Devenir bénévole
                     <HandHeart size={18} weight="duotone" />
                   </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button variant="outline" size="lg" className="w-full justify-between">
-                    Proposer une action
-                    <Sparkle size={18} weight="duotone" />
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button variant="ghost" size="lg" className="w-full justify-between">
-                    <span className="inline-flex items-center gap-2">
-                      <EnvelopeSimple size={18} weight="duotone" />
-                      Nous contacter
-                    </span>
-                    <ArrowRight size={16} weight="bold" />
-                  </Button>
-                </Link>
+                </a>
               </div>
             </div>
           </div>

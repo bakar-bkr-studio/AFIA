@@ -4,10 +4,11 @@ import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { FadeIn } from "@/components/ui/Motion";
 import { ArrowRight, HandHeart, EnvelopeSimple } from "@phosphor-icons/react";
+import { ADHESIONS_OUVERTES, LIBELLE_BOUTON_ADHESION, PROCHAINE_SESSION } from "@/lib/adhesion";
 
 export function CtaSection() {
   return (
-    <Section className="bg-surface">
+    <Section className="bg-surface py-16 md:py-24">
       <FadeIn>
         <div className="grain-light relative rounded-3xl overflow-hidden bg-primary-900 p-12 md:p-20">
           {/* Blobs */}
@@ -27,6 +28,11 @@ export function CtaSection() {
               <p className="mt-5 text-base md:text-lg text-primary-200 leading-relaxed max-w-[55ch] lg:mx-auto">
                 Adhérez, donnez de votre temps ou simplement posez vos
                 questions. AFIA se construit avec ses habitants.
+                {!ADHESIONS_OUVERTES && (
+                  <span className="block mt-2 text-sm text-primary-300">
+                    Prochaine session d’adhésion : {PROCHAINE_SESSION}.
+                  </span>
+                )}
               </p>
             </div>
 
@@ -35,11 +41,11 @@ export function CtaSection() {
                 href="/adhesion"
                 className="inline-flex items-center gap-2 px-8 py-[16px] bg-accent hover:bg-accent-hover text-white font-heading font-bold text-[15px] rounded-full transition-colors duration-200 shadow-[0_3px_0_rgba(212,84,30,0.5)]"
               >
-                Adhérer · 22 €
+                {LIBELLE_BOUTON_ADHESION}
                 <ArrowRight size={17} weight="bold" />
               </Link>
               <Link
-                href="/contact"
+                href="#benevoles"
                 className="inline-flex items-center gap-2 px-8 py-[16px] bg-transparent hover:bg-white/10 text-white font-heading font-bold text-[15px] rounded-full ring-2 ring-white/30 hover:ring-white/50 transition-all duration-200"
               >
                 <HandHeart size={17} weight="duotone" />

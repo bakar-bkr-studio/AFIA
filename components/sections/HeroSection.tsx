@@ -40,9 +40,9 @@ export function HeroSection() {
 
           <p className="mt-8 text-[clamp(16px,1.4vw,21px)] leading-relaxed text-primary-100 max-w-[680px] mx-auto">
             AFIA rassemble les familles du quartier de Beauval, à Meaux.
-            Sorties, ateliers, accompagnement scolaire, repas citoyens —
-            depuis quinze ans, nous tissons les liens qui font tenir un
-            quartier debout.
+            Sorties, aide aux devoirs, fêtes de quartier, repas solidaires :
+            depuis 2010, nous tissons les liens qui font tenir un quartier
+            debout.
           </p>
 
           <div className="mt-10 flex gap-4 justify-center flex-wrap">

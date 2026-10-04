@@ -5,24 +5,24 @@ import { cn } from "@/lib/utils";
 
 const stats = [
   {
-    value: "230",
-    label: "Repas citoyens servis",
-    sub: "Colisée de Meaux · 2 mars 2026",
+    value: "16",
+    label: "Ans au cœur de Beauval",
+    sub: "Association créée en 2010",
+  },
+  {
+    value: "30",
+    label: "Familles adhérentes",
+    sub: "Environ 110 adhérents",
+  },
+  {
+    value: "+170",
+    label: "Participants aux sorties",
+    sub: "Été 2026 · 3 sorties familles",
   },
   {
     value: "10",
-    label: "Jeunes accompagnés",
-    sub: "Programme aide aux devoirs",
-  },
-  {
-    value: "5",
-    label: "Événements de familles",
-    sub: "Avril → août 2026",
-  },
-  {
-    value: "15",
-    label: "Années de service",
-    sub: "Depuis 2010 — Beauval, Meaux",
+    label: "Élèves accompagnés",
+    sub: "Aide aux devoirs, 2 fois par semaine",
   },
 ];
 

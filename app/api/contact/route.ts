@@ -5,11 +5,13 @@ export const runtime = "nodejs";
 const MAX_NAME_LENGTH = 120;
 const MAX_SUBJECT_LENGTH = 120;
 const MAX_MESSAGE_LENGTH = 5_000;
+const MAX_PHONE_LENGTH = 30;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type ContactPayload = {
   name?: unknown;
   email?: unknown;
+  phone?: unknown;
   subject?: unknown;
   message?: unknown;
   website?: unknown;
@@ -38,7 +40,10 @@ export async function POST(request: Request) {
     !isValidString(payload.email, 254) ||
     !isValidString(payload.subject, MAX_SUBJECT_LENGTH) ||
     !isValidString(payload.message, MAX_MESSAGE_LENGTH) ||
-    !emailPattern.test(payload.email.trim())
+    !emailPattern.test(payload.email.trim()) ||
+    (payload.phone !== undefined &&
+      payload.phone !== "" &&
+      !isValidString(payload.phone, MAX_PHONE_LENGTH))
   ) {
     return Response.json(
       { error: "Veuillez renseigner tous les champs avec des informations valides." },
@@ -60,6 +65,7 @@ export async function POST(request: Request) {
 
   const name = payload.name.trim();
   const email = payload.email.trim();
+  const phone = typeof payload.phone === "string" ? payload.phone.trim() : "";
   const subject = payload.subject.trim();
   const message = payload.message.trim();
   const resend = new Resend(apiKey);
@@ -75,6 +81,7 @@ export async function POST(request: Request) {
         "",
         `Nom / Prénom : ${name}`,
         `Email : ${email}`,
+        `Téléphone : ${phone || "non renseigné"}`,
         `Sujet : ${subject}`,
         "",
         "Message :",

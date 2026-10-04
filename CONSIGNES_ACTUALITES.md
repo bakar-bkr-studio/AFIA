@@ -51,13 +51,19 @@ Chaque entrée de `data/actualites.json` contient :
 | `category` | Sortie, Événement, Programme, À venir, Ville, Dispositif, Culture, Jeunesse |
 | `title` | titre court et concret |
 | `date` | date lisible (ex. `16 juillet 2026`) |
+| `date_iso` | date au format `AAAA-MM-JJ` (ex. `2026-07-16`), sert au tri automatique et au regroupement par mois ; `null` si inconnue |
+| `heure` | horaires lisibles (ex. `16h30 – 18h`) ; `null` si inconnus |
+| `lieu` | lieu lisible (ex. `Square de la Brie`) ; `null` si inconnu |
+| `pole` | `ludique`, `societal` ou `jeunesse` : ajoute un lien vers la page du pôle ; `null` sinon |
 | `excerpt` | 2 à 4 phrases, concrètes (chiffres globaux, remerciements) |
 | `image` | chemin vers une vraie photo validée dans `public/images/actualites/`, jamais une photo d'enfants identifiables |
 | `statut` | `a_venir`, `en_cours`, `termine`, `permanent` ou `a_verifier` |
 | `publie` | `true` pour afficher, `false` pour masquer sans supprimer |
 | `source` | fichier de l'espace AFIA d'où vient l'information |
 
-Les actualités sont rangées de la plus récente ou la plus importante à la moins importante. L'accueil affiche les 4 premières de chaque onglet.
+L'ordre est automatique : les actualités `a_venir` et `en_cours` d'abord (la plus proche en premier), puis les autres de la plus récente à la plus ancienne, selon `date_iso`. L'accueil affiche les 4 premières de l'onglet AFIA. Chaque actualité publiée a sa propre page : `/actualites/<id>`.
+
+L'onglet « Ville de Meaux » affiche un message « Bientôt disponible » tant que `MEAUX_DISPONIBLE` vaut `false` dans `lib/actualites.ts`.
 
 ## 6. Ton et style
 

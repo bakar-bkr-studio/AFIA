@@ -114,7 +114,7 @@ export function PoleJeunesse() {
   return (
     <>
       {/* ════ Hero — éditorial, asymétrique ════ */}
-      <section className="relative pt-32 md:pt-40 pb-20 md:pb-28 overflow-hidden bg-paper-warm">
+      <section className="relative pt-14 md:pt-20 pb-20 md:pb-28 overflow-hidden bg-paper-warm">
         <div className="grain-light absolute inset-0 pointer-events-none" />
         <div className="relative mx-auto max-w-[1400px] px-6 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end">
